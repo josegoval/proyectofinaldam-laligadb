@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista;
+package vista.jframes;
 
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
@@ -32,6 +32,8 @@ public class JFrame_Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dialogoCrearUsuario = new javax.swing.JDialog();
+        jPanel_CrearUsuario = new vista.jpanels.JPanel_CrearUsuario();
         jPanel_All = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -42,10 +44,26 @@ public class JFrame_Login extends javax.swing.JFrame {
         texto_contrasenia = new javax.swing.JPasswordField();
         texto_usuario = new javax.swing.JFormattedTextField();
 
+        jPanel_CrearUsuario.setMaximumSize(new java.awt.Dimension(413, 300));
+
+        javax.swing.GroupLayout dialogoCrearUsuarioLayout = new javax.swing.GroupLayout(dialogoCrearUsuario.getContentPane());
+        dialogoCrearUsuario.getContentPane().setLayout(dialogoCrearUsuarioLayout);
+        dialogoCrearUsuarioLayout.setHorizontalGroup(
+            dialogoCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogoCrearUsuarioLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel_CrearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        dialogoCrearUsuarioLayout.setVerticalGroup(
+            dialogoCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogoCrearUsuarioLayout.createSequentialGroup()
+                .addComponent(jPanel_CrearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(new java.awt.Dimension(407, 247));
         setMinimumSize(new java.awt.Dimension(407, 247));
         setResizable(false);
 
@@ -66,7 +84,7 @@ public class JFrame_Login extends javax.swing.JFrame {
         btnNuevaCuenta.setText("Nueva Cuenta");
 
         try {
-            texto_usuario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##############################")));
+            texto_usuario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("******************************")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -185,11 +203,13 @@ public class JFrame_Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnIniciarSesion;
     public javax.swing.JButton btnNuevaCuenta;
+    public javax.swing.JDialog dialogoCrearUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel_All;
+    public vista.jpanels.JPanel_CrearUsuario jPanel_CrearUsuario;
     public javax.swing.JPasswordField texto_contrasenia;
     public javax.swing.JFormattedTextField texto_usuario;
     // End of variables declaration//GEN-END:variables

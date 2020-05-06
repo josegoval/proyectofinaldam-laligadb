@@ -6,8 +6,10 @@
 package controlador;
 
 /**
- *
+ * Main de inicio de la aplicacion.
+ * 
  * @author Jose
+ * @since 06/05/2020
  */
 public class Main {
 
@@ -16,6 +18,8 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        new Controlador_Login().iniciar();
     }
     
 }
