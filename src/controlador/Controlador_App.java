@@ -5,10 +5,18 @@
  */
 package controlador;
 
+import vista.jframes.JFrame_App;
+
 /**
- *
+ * Controlador de la App. <br>
+ * Contiene el modelo, la vista, y el usuario con el cual se logeó que 
+ * mediante este controlador, modificará la vista.
+ * 
  * @author Jose
+ * @since 06/05/2020
  */
 public class Controlador_App {
-    
+// ATRIBUTOS
+    private JFrame_App vista;
+// CONSTRUCTORES
 }

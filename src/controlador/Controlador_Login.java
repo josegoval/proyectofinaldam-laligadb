@@ -5,16 +5,11 @@
  */
 package controlador;
 
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import modelo.Modelo_Login;
 import modelo.conexion.ConexionBD;
 import modelo.conexion.CuentasBD;
@@ -72,9 +67,6 @@ public class Controlador_Login implements ActionListener {
         // Componentes de crear nuevo usuario
         this.vista.jPanel_CrearUsuario.btn_CrearNuevoUsuario.addActionListener(this);
         this.vista.jPanel_CrearUsuario.btn_CrearNuevoUsuario.setActionCommand("CrearNuevoUsuario");
-        // 1.- Seguir enlazando los campos restantes...
-        // 2.- Crear el JDIALOG que registra al usuario con sus warnins porque
-        // el nombre ya este registrado
     }
 
     @Override
@@ -113,7 +105,7 @@ public class Controlador_Login implements ActionListener {
             if (rs.next()) {
                 if (Seguridad.validarContrasenia(rs.getString(1), 
                         Seguridad.hashPassSHA256(vista.texto_contrasenia.getText()))) {
-                    arrancarAplicacion();
+                    arrancarApp();
                 } else {
                     MuestraMensaje.muestraError(vista, "La contraseña no coincide.", 
                             "Contraseña inválida");
@@ -133,8 +125,14 @@ public class Controlador_Login implements ActionListener {
         }
     }
     
-    public void arrancarAplicacion() {
-        
+    /**
+     * Cierra la vista actual de logeo, y carga la App (aplicación principal) 
+     * completa en la nueva vista-modelo-controlador pasandole los datos
+     * del usuarios a la misma.
+     */
+    public void arrancarApp() {
+        this.vista.dispose();
+        // Queda por rellenar al apertura.
     }
     
     /**
@@ -154,45 +152,28 @@ public class Controlador_Login implements ActionListener {
      * @see #nuevaCuenta() 
      */
     public void crearNuevoUsuario() {
-        Connection con = null;
-        PreparedStatement pstm = null;
-        int exito;
+        String[] resultado = modelo.insertarCuenta(
+                vista.jPanel_CrearUsuario.texto_NuevoUsuario.getText(), 
+                vista.jPanel_CrearUsuario.texto_NuevaContrasenia.getText(),
+                "NORMAL");
         
-        try {
-            con = ConexionBD.getConexion(CuentasBD.CREADOR);
-            pstm = con.prepareStatement("INSERT INTO usuarios VALUES(?,?,?)");
-            pstm.setString(1, vista.jPanel_CrearUsuario.texto_NuevoUsuario.getText());
-            System.out.println(vista.jPanel_CrearUsuario.texto_NuevoUsuario.getText());
-            pstm.setString(2, Seguridad.hashPassSHA256(vista.jPanel_CrearUsuario.texto_NuevaContrasenia.getText()));
-            pstm.setString(3, "NORMAL");
-            exito = pstm.executeUpdate();
-            
-            if (exito == 1) {
-                MuestraMensaje.muestraExito(vista, 
-                        "Has creado tu usuario: ¡Enhorabuena!", 
-                        "¡Usuario Creado!");
+        switch (resultado[0]) {
+            case "exito":
+                break;
+            case "¡Usuario Creado!":
+                MuestraMensaje.muestraExito(vista, resultado[1], resultado[0]);
                 vista.dialogoCrearUsuario.dispose();
-            } else {
-                MuestraMensaje.muestraError(vista, 
-                        "¡No se ha podido crear su usuario!", "Error");
-            }
-        } catch (MySQLIntegrityConstraintViolationException sqle) {
-            sqle.printStackTrace();
-            MuestraMensaje.muestraAdvertencia(vista, 
-                        "Ese nombre de usuario no está disponible. Por favor,"
-                                + "escoja uno diferente.", 
-                        "Usuario no disponible");
-        } catch (Exception e) {
-            e.printStackTrace();
-            MuestraMensaje.muestraError(vista, 
-                        "¡Hay un error con la base de datos! Por favor, "
-                                + "comuniquese con un administrador para "
-                                + "solucionar el problema o intentelo más tarde.", 
-                        "Error del Sistema.");
-            vista.dialogoCrearUsuario.dispose();
-        } finally {
-            ConexionBD.cerrar(con);
-            ConexionBD.cerrar(pstm);
+                break;
+            case "Usuario no disponible":
+                MuestraMensaje.muestraAdvertencia(vista, resultado[1], resultado[0]);
+                break;
+            case "Error del Sistema":
+                MuestraMensaje.muestraError(vista, resultado[1], resultado[0]);
+                break;
+            case "Error":
+                MuestraMensaje.muestraError(vista, resultado[1], resultado[0]);
+                break;
+            
         }
         
     }
