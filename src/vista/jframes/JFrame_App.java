@@ -5,6 +5,8 @@
  */
 package vista.jframes;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Jose
@@ -16,6 +18,7 @@ public class JFrame_App extends javax.swing.JFrame {
      */
     public JFrame_App() {
         initComponents();
+        this.setIconImage(new ImageIcon("./src/vista/imagenes/favicon.png").getImage());
     }
 
     /**
@@ -31,51 +34,23 @@ public class JFrame_App extends javax.swing.JFrame {
         jTabbedPane_Cabecera = new javax.swing.JTabbedPane();
         jPanel_futbolistas = new vista.jpanels.JPanel_Tablas();
         jPanel_clubs = new vista.jpanels.JPanel_Tablas();
-        jPanel_cuentas = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jPanel_futbolistas.setFocusable(false);
-        jPanel_futbolistas.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
         jTabbedPane_Cabecera.addTab("Futbolistas", jPanel_futbolistas);
-
-        jPanel_clubs.setFocusable(false);
-        jPanel_clubs.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
         jTabbedPane_Cabecera.addTab("Clubs", jPanel_clubs);
-
-        jRadioButton1.setText("jRadioButton1");
-
-        javax.swing.GroupLayout jPanel_cuentasLayout = new javax.swing.GroupLayout(jPanel_cuentas);
-        jPanel_cuentas.setLayout(jPanel_cuentasLayout);
-        jPanel_cuentasLayout.setHorizontalGroup(
-            jPanel_cuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_cuentasLayout.createSequentialGroup()
-                .addContainerGap(403, Short.MAX_VALUE)
-                .addComponent(jRadioButton1)
-                .addGap(320, 320, 320))
-        );
-        jPanel_cuentasLayout.setVerticalGroup(
-            jPanel_cuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_cuentasLayout.createSequentialGroup()
-                .addGap(196, 196, 196)
-                .addComponent(jRadioButton1)
-                .addContainerGap(380, Short.MAX_VALUE))
-        );
-
-        jTabbedPane_Cabecera.addTab("tab3", jPanel_cuentas);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane_Cabecera, javax.swing.GroupLayout.PREFERRED_SIZE, 821, Short.MAX_VALUE)
+            .addComponent(jTabbedPane_Cabecera)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jTabbedPane_Cabecera, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane_Cabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -130,10 +105,8 @@ public class JFrame_App extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
-    private vista.jpanels.JPanel_Tablas jPanel_clubs;
-    private javax.swing.JPanel jPanel_cuentas;
-    private vista.jpanels.JPanel_Tablas jPanel_futbolistas;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JTabbedPane jTabbedPane_Cabecera;
+    public vista.jpanels.JPanel_Tablas jPanel_clubs;
+    public vista.jpanels.JPanel_Tablas jPanel_futbolistas;
+    public javax.swing.JTabbedPane jTabbedPane_Cabecera;
     // End of variables declaration//GEN-END:variables
 }

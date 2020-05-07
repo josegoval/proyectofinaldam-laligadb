@@ -7,13 +7,8 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import modelo.Modelo_Login;
-import modelo.conexion.ConexionBD;
-import modelo.conexion.CuentasBD;
-import modelo.usuarios.Seguridad;
+import modelo.Cuentas;
+import modelo.usuarios.Usuario;
 import vista.jframes.JFrame_Login;
 
 /**
@@ -26,7 +21,7 @@ import vista.jframes.JFrame_Login;
 public class Controlador_Login implements ActionListener {
 // ATRIBUTOS
     private JFrame_Login vista;
-    private Modelo_Login modelo;
+    private Cuentas modelo;
     
 // CONSTRUCTORES
     /**
@@ -35,7 +30,7 @@ public class Controlador_Login implements ActionListener {
      */
     public Controlador_Login() {
         this.vista = new JFrame_Login();
-        this.modelo = new Modelo_Login();
+        this.modelo = new Cuentas();
     }
     
     /**
@@ -43,7 +38,7 @@ public class Controlador_Login implements ActionListener {
      * @param vista
      * @param modelo 
      */
-    public Controlador_Login(JFrame_Login vista, Modelo_Login modelo) {
+    public Controlador_Login(JFrame_Login vista, Cuentas modelo) {
         this.vista = vista;
         this.modelo = modelo;
     }
@@ -92,37 +87,15 @@ public class Controlador_Login implements ActionListener {
      * controlador y modelo.
      */
     public void iniciarSesion() {
-        Connection con = null;
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
+        String user = vista.texto_usuario.getText();
+        String[] resultado = modelo.validarSesion(user, vista.texto_contrasenia.getText());
         
-        try {
-            con = ConexionBD.getConexion(CuentasBD.LOGIN);
-            pstm = con.prepareStatement("Select password from usuarios where user=?");
-            pstm.setString(1, vista.texto_usuario.getText());
-            rs = pstm.executeQuery();
-            
-            if (rs.next()) {
-                if (Seguridad.validarContrasenia(rs.getString(1), 
-                        Seguridad.hashPassSHA256(vista.texto_contrasenia.getText()))) {
-                    arrancarApp();
-                } else {
-                    MuestraMensaje.muestraError(vista, "La contraseña no coincide.", 
-                            "Contraseña inválida");
-                }
-            } else {
-                MuestraMensaje.muestraAdvertencia(vista, "Ese usuario no existe.", 
-                        "Usuario desconocido");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            MuestraMensaje.muestraError(vista, "Error al conectarse a la base de datos.", 
-                    "Error del sistema");
-        } finally {
-            ConexionBD.cerrar(con);
-            ConexionBD.cerrar(pstm);
-            ConexionBD.cerrar(rs);
+        if (resultado[0].equals("Exito")) {
+            arrancarApp(user);
+        } else {
+            MuestraMensaje.muestraError(vista, resultado[1], resultado[0]);
         }
+        
     }
     
     /**
@@ -130,9 +103,14 @@ public class Controlador_Login implements ActionListener {
      * completa en la nueva vista-modelo-controlador pasandole los datos
      * del usuarios a la misma.
      */
-    public void arrancarApp() {
-        this.vista.dispose();
+    public void arrancarApp(String user) {
+        Usuario usuarioLogeado = modelo.buscarUsuario(user);
         // Queda por rellenar al apertura.
+        if (usuarioLogeado != null) {
+            this.vista.dispose();
+            new Controlador_App(usuarioLogeado);
+        } else {
+        }
     }
     
     /**
@@ -157,23 +135,16 @@ public class Controlador_Login implements ActionListener {
                 vista.jPanel_CrearUsuario.texto_NuevaContrasenia.getText(),
                 "NORMAL");
         
-        switch (resultado[0]) {
-            case "exito":
-                break;
-            case "¡Usuario Creado!":
-                MuestraMensaje.muestraExito(vista, resultado[1], resultado[0]);
-                vista.dialogoCrearUsuario.dispose();
-                break;
-            case "Usuario no disponible":
-                MuestraMensaje.muestraAdvertencia(vista, resultado[1], resultado[0]);
-                break;
-            case "Error del Sistema":
-                MuestraMensaje.muestraError(vista, resultado[1], resultado[0]);
-                break;
-            case "Error":
-                MuestraMensaje.muestraError(vista, resultado[1], resultado[0]);
-                break;
-            
+        if (resultado[0].equals("¡Usuario Creado!")) {
+            MuestraMensaje.muestraExito(vista.dialogoCrearUsuario, resultado[1],
+                    resultado[0]);
+            vista.dialogoCrearUsuario.dispose();
+        } else if(resultado[0].equals("Usuario no disponible")) {
+            MuestraMensaje.muestraAdvertencia(vista.dialogoCrearUsuario, 
+                    resultado[1], resultado[0]);
+        } else {
+            MuestraMensaje.muestraError(vista.dialogoCrearUsuario, 
+                    resultado[1], resultado[0]);
         }
         
     }

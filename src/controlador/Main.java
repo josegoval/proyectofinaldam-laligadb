@@ -5,6 +5,9 @@
  */
 package controlador;
 
+import modelo.usuarios.TiposUsuario;
+import modelo.usuarios.Usuario;
+
 /**
  * Main de inicio de la aplicacion.
  * 
@@ -20,6 +23,7 @@ public class Main {
         // TODO code application logic here
         
         new Controlador_Login().iniciar();
+        //new Controlador_App(new Usuario("None", "", TiposUsuario.valueOf("ADMIN"))).iniciar();
     }
     
 }
