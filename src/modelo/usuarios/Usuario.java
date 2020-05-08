@@ -5,6 +5,8 @@
  */
 package modelo.usuarios;
 
+import modelo.conexion.CuentasBD;
+
 /**
  * Clase básica Usuario que contiene todo lo necesario para logear y validar
  * las cuestiones referentes al usuario.
@@ -44,6 +46,15 @@ public class Usuario {
     }
     
 // METODOS
+    /**
+     * Transforma el tipo del usuario al tipo de cuenta que se conecta
+     * a la base de datos.
+     * @return CuentaBD con la que se conectará a la base de datos.
+     */
+    public CuentasBD getTipoCuentaBD(){
+        return CuentasBD.valueOf(tipo.toString());
+    }
+    
 // SETTERS & GETTERS
     public String getUser() {
         return user;

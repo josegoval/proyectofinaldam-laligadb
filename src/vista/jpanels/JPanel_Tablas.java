@@ -28,7 +28,7 @@ public class JPanel_Tablas extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
         btn_aniadir = new javax.swing.JButton();
         btn_modificar = new javax.swing.JButton();
         btn_eliminar = new javax.swing.JButton();
@@ -36,7 +36,7 @@ public class JPanel_Tablas extends javax.swing.JPanel {
         btn_buscar = new javax.swing.JButton();
         btn_actualizar = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -47,7 +47,7 @@ public class JPanel_Tablas extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable);
 
         btn_aniadir.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         btn_aniadir.setForeground(new java.awt.Color(45, 139, 14));
@@ -122,6 +122,6 @@ public class JPanel_Tablas extends javax.swing.JPanel {
     public javax.swing.JButton btn_eliminar;
     public javax.swing.JButton btn_modificar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public javax.swing.JTable jTable;
     // End of variables declaration//GEN-END:variables
 }

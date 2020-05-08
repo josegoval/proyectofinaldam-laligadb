@@ -30,10 +30,23 @@ public class JFrame_App extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dialogoFutbolistaAniadir = new javax.swing.JDialog();
+        jPanel_FutbolistaDatosAniadir = new vista.jpanels.JPanel_FutbolistaAniadir();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane_Cabecera = new javax.swing.JTabbedPane();
         jPanel_futbolistas = new vista.jpanels.JPanel_Tablas();
         jPanel_clubs = new vista.jpanels.JPanel_Tablas();
+
+        javax.swing.GroupLayout dialogoFutbolistaAniadirLayout = new javax.swing.GroupLayout(dialogoFutbolistaAniadir.getContentPane());
+        dialogoFutbolistaAniadir.getContentPane().setLayout(dialogoFutbolistaAniadirLayout);
+        dialogoFutbolistaAniadirLayout.setHorizontalGroup(
+            dialogoFutbolistaAniadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel_FutbolistaDatosAniadir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        dialogoFutbolistaAniadirLayout.setVerticalGroup(
+            dialogoFutbolistaAniadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel_FutbolistaDatosAniadir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -104,7 +117,9 @@ public class JFrame_App extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JDialog dialogoFutbolistaAniadir;
     private javax.swing.JPanel jPanel1;
+    public vista.jpanels.JPanel_FutbolistaAniadir jPanel_FutbolistaDatosAniadir;
     public vista.jpanels.JPanel_Tablas jPanel_clubs;
     public vista.jpanels.JPanel_Tablas jPanel_futbolistas;
     public javax.swing.JTabbedPane jTabbedPane_Cabecera;

@@ -57,8 +57,40 @@ public class Futbolista {
         this.nif = nif;
     }
     
+    /**
+     * Constructor que inicializa todos los atributos de la clase menos el id 
+     * que se asigna a 0 por convención. Es exclusivo para el uso del insert.
+     * @param nombre Nombre del futbolista.
+     * @param apellido Apellido del futbolista.
+     * @param anio_nacimiento Año de nacimiento del futbolista.
+     * @param nacionalidad Nacionalidad del futbolista.
+     * @param nif NIF del futbolista.
+     */
+    public Futbolista(String nombre, String apellido, int anio_nacimiento, String nacionalidad, String nif) {
+        this.id = 0;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.anio_nacimiento = anio_nacimiento;
+        this.nacionalidad = nacionalidad;
+        this.nif = nif;
+    }
+    
 // METODOS
+    /**
+     * Construye un array de String con todos los datos del futbolista.
+     * @return Un array de string con el siguiente orden: id, nif, nombre,
+     * apellido, año de nacimiento, nacionalidad.
+     */
+    public String[] getArrayAtributos() {
+        return new String[]{Integer.toString(id), nif, nombre, apellido, 
+            Integer.toString(anio_nacimiento), nacionalidad};
+    }
+    
 // SETTERS & GETTERS
+    public int getId() {
+        return id;
+    }
+    
     public String getNombre() {
         return nombre;
     }

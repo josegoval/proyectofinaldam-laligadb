@@ -110,6 +110,10 @@ public class Controlador_Login implements ActionListener {
             this.vista.dispose();
             new Controlador_App(usuarioLogeado);
         } else {
+            MuestraMensaje.muestraError(vista, "Ha habido un error al "
+                    + "conectarse con tu usuario a la base de datos del "
+                    + "sistema. Intentelo más tarde o contacte con un "
+                    + "administrador.", "Error al conectar");
         }
     }
     
