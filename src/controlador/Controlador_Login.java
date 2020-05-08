@@ -50,6 +50,8 @@ public class Controlador_Login implements ActionListener {
      * aplicación.
      */
     public void iniciar(){
+        vista.setLocationRelativeTo(null);
+        vista.dialogoCrearUsuario.setLocationRelativeTo(null);
         vista.setVisible(true);
         
         // Enlazo la vista con las funcionalidades

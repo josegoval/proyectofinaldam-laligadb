@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JDialog;
@@ -58,7 +59,11 @@ public class Controlador_App implements ActionListener {
         // Cambios en vista
         vista.setTitle("La Liga DB - " + usuarioLogeado.getUser() + " [" 
                 + usuarioLogeado.getTipo().name() + "]");
+        vista.setLocationRelativeTo(null);
         vista.setVisible(true);
+        // Cambios en la localizacion de los dialogos.
+        vista.dialogoFutbolistaAniadir.setLocationRelativeTo(null);
+        vista.dialogoFutbolistaModificar.setLocationRelativeTo(null);
         
         // Enlace controlador-vista
         if (usuarioLogeado.getTipo() == TiposUsuario.NORMAL) {
@@ -213,7 +218,7 @@ public class Controlador_App implements ActionListener {
      */
     private void futbolistasAniadir() {
         estandarizarVentana(vista.dialogoFutbolistaAniadir, "Añadir un nuevo futbolista",
-                100, 100, 380, 350, false, true);
+                380, 350, false, true, vista);
     }
     
     /**
@@ -288,7 +293,7 @@ public class Controlador_App implements ActionListener {
                             .getValueAt(seleccion, 5).toString());
             // Abro la ventana
             estandarizarVentana(vista.dialogoFutbolistaModificar, "Modificar un futbolista",
-                    100, 100, 380, 350, false, true);
+                    380, 350, false, true, vista);
         }
     }
     
@@ -332,28 +337,76 @@ public class Controlador_App implements ActionListener {
     }
 
     // ELIMINAR FUTBOLISTA METODOS
+    /**
+     * Elimina de la base de datos (DELETE) el futbolista seleccionado, 
+     * informando al usuario del resultado de la acción.
+     */
     private void futbolistasEliminar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Futbolista futbolistaEliminar;
+        int seleccion = vista.jPanel_futbolistas.jTable.getSelectedRow();
+        boolean eliminar;
+        String[] resultado;
+        
+        if (seleccion == -1) {
+            MuestraMensaje.muestraAdvertencia(vista, "Por favor seleccione un "
+                    + "futbolista a eliminar.", "Sin selección");
+        } else {
+            futbolistaEliminar = new Futbolista(
+                    Integer.parseInt(vista.jPanel_futbolistas.jTable
+                            .getValueAt(seleccion, 0).toString()), 
+                    vista.jPanel_futbolistas.jTable
+                            .getValueAt(seleccion, 2).toString(), 
+                    vista.jPanel_futbolistas.jTable
+                            .getValueAt(seleccion, 3).toString(), 
+                    Integer.parseInt(vista.jPanel_futbolistas.jTable
+                            .getValueAt(seleccion, 4).toString()), 
+                    vista.jPanel_futbolistas.jTable
+                            .getValueAt(seleccion, 5).toString(), 
+                    vista.jPanel_futbolistas.jTable
+                            .getValueAt(seleccion, 1).toString());
+            // Abro la ventana
+            eliminar = MuestraMensaje.muestraConfirmación(
+                    vista.jPanel_futbolistas, 
+                    "¿Está seguro que quiere eliminar al futbolista " 
+                            + futbolistaEliminar.getNif() + " con nombre completo "
+                            + futbolistaEliminar.getNombre() + " "
+                            + futbolistaEliminar.getApellido() + "?",
+                    "Eliminar futbolista " + futbolistaEliminar.getId());
+            // Pasa al procedimiento
+            if (eliminar) {
+                resultado = futbolistas.eliminarFutbolista(futbolistaEliminar, 
+                        usuarioLogeado.getTipoCuentaBD());
+                if (resultado[0].equals("Exito")) {
+                    MuestraMensaje.muestraExito(vista.jPanel_futbolistas, 
+                            resultado[1], resultado[0]);
+                } else {
+                    MuestraMensaje.muestraError(vista.jPanel_futbolistas, 
+                            resultado[1], resultado[0]);
+                }
+                // Recarga la tabla independientemente del resultado
+                futbolistasActualizar();
+            }
+        }
     }
     
     // METODOS DE ESTILO
     /**
      * Modifica la ventana introducida para que aparezca con los datos 
-     * propuestos y la coloca como visible.
+     * propuestos y la coloca como visible. Además centra la ventana a la
+     * vista del controlador. 
      * @param ventana Ventana a modificar.
      * @param titulo Titulo de la ventana.
-     * @param lx Localizacion x
-     * @param ly Localizacion y
      * @param sz Size x
      * @param sy Size y
      * @param resizable ¿Resizable?
      * @param modal ¿Modal?
+     * @param relativoA Ventana a la que mostrar relativo.
      */
-    private void estandarizarVentana(JDialog ventana, String titulo, int lx, 
-            int ly, int sz, int sy, boolean resizable, boolean modal) {
+    private void estandarizarVentana(JDialog ventana, String titulo, int sz, 
+            int sy, boolean resizable, boolean modal, Component relativoA) {
         ventana.setTitle(titulo);
-        ventana.setLocation(lx, ly);
         ventana.setSize(sz, sy);
+        ventana.setLocationRelativeTo(relativoA);
         ventana.setResizable(resizable);
         ventana.setModal(modal);
         ventana.setVisible(true);

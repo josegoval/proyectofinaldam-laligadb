@@ -45,4 +45,22 @@ public class MuestraMensaje {
     public static void muestraAdvertencia(Component componente, String mensaje, String titulo) {
         JOptionPane.showMessageDialog(componente, mensaje, titulo, JOptionPane.WARNING_MESSAGE);
     }    
+    
+    /**
+     * Muestra un mensaje de confirmación con "sí" o "no". Y devuelve el 
+     * resultado escogido.
+     * @param componente Componente al que alojar.
+     * @param mensaje Mensaje a mostrar.
+     * @param titulo Titulo del mensaje.
+     * @return true = si , false = no
+     */
+    public static boolean muestraConfirmación(Component componente, String mensaje, String titulo){
+        int opcion = JOptionPane.showConfirmDialog(componente, mensaje, titulo, 
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (opcion == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
