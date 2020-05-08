@@ -51,7 +51,7 @@ public class Controlador_Login implements ActionListener {
      */
     public void iniciar(){
         vista.setLocationRelativeTo(null);
-        vista.dialogoCrearUsuario.setLocationRelativeTo(null);
+        vista.dialogoCrearUsuario.setLocationRelativeTo(vista);
         vista.setVisible(true);
         
         // Enlazo la vista con las funcionalidades
@@ -124,6 +124,7 @@ public class Controlador_Login implements ActionListener {
      */
     public void nuevaCuenta(){
         vista.dialogoCrearUsuario.setSize(432, 261);
+        vista.dialogoCrearUsuario.setLocationRelativeTo(vista);
         vista.dialogoCrearUsuario.setModal(true);
         vista.jPanel_CrearUsuario.texto_NuevaContrasenia.setText("");
         vista.jPanel_CrearUsuario.texto_NuevoUsuario.setText("");
