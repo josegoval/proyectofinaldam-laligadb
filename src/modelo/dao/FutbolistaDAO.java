@@ -166,9 +166,9 @@ public class FutbolistaDAO {
         
         try {
             con = ConexionBD.getConexion(cuenta);
-            pstm = con.prepareStatement("UPDATE futbolistas (nombre, "
-                    + "apellido, anio_nacimiento, nacionalidad, nif) "
-                    + "VALUES(?,?,?,?,?) where id=?");
+            pstm = con.prepareStatement("UPDATE futbolistas SET nombre=?, "
+                    + "apellido=?, anio_nacimiento=?, nacionalidad=?, nif=? "
+                    + "where id=?");
             pstm.setString(1, futbolista.getNombre());
             pstm.setString(2, futbolista.getApellido());
             pstm.setInt(3, futbolista.getAnio_nacimiento());

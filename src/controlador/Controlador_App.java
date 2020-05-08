@@ -83,10 +83,15 @@ public class Controlador_App implements ActionListener {
             vista.jPanel_futbolistas.btn_eliminar.addActionListener(this);
             vista.jPanel_futbolistas.btn_eliminar.setActionCommand("futbolistas_eliminar");
                 // Añadir futbolista
-                vista.jPanel_FutbolistaDatosAniadir.btn_accion.addActionListener(this);
-                vista.jPanel_FutbolistaDatosAniadir.btn_accion.setActionCommand("fa_aniadir");
-                vista.jPanel_FutbolistaDatosAniadir.btn_cancelar.addActionListener(this);
-                vista.jPanel_FutbolistaDatosAniadir.btn_cancelar.setActionCommand("fa_cancelar");
+                vista.jPanel_FutbolistaAniadir.btn_accion.addActionListener(this);
+                vista.jPanel_FutbolistaAniadir.btn_accion.setActionCommand("fa_aniadir");
+                vista.jPanel_FutbolistaAniadir.btn_cancelar.addActionListener(this);
+                vista.jPanel_FutbolistaAniadir.btn_cancelar.setActionCommand("fa_cancelar");
+                // Modificar futbolista
+                vista.jPanel_FutbolistaModificar.btn_accion.addActionListener(this);
+                vista.jPanel_FutbolistaModificar.btn_accion.setActionCommand("fm_modificar");
+                vista.jPanel_FutbolistaModificar.btn_cancelar.addActionListener(this);
+                vista.jPanel_FutbolistaModificar.btn_cancelar.setActionCommand("fm_cancelar");
             
             // Referente al panel de clubs...
             vista.jPanel_clubs.btn_aniadir.addActionListener(this);
@@ -125,7 +130,6 @@ public class Controlador_App implements ActionListener {
                 break;
                 
             case "futbolistas_modificar":
-                System.out.println("controlador.Controlador_App.actionPerformed()");
                 futbolistasModificar();
                 break;
                 
@@ -144,15 +148,20 @@ public class Controlador_App implements ActionListener {
             case "futbolistas_actualizar":
                 futbolistasActualizar();
                 break;
-            // AÑADIR FUTBOLISTAS
+                // AÑADIR FUTBOLISTAS
                 case "fa_aniadir":
                     faAniadir();
                 break;
                 case "fa_cancelar":
                     vista.dialogoFutbolistaAniadir.dispose();
                 break;
-            // MODIFICAR FUTBOLISTAS
-                
+                // MODIFICAR FUTBOLISTAS
+                case "fm_modificar":
+                    fmModificar();
+                break;
+                case "fm_cancelar":
+                    vista.dialogoFutbolistaModificar.dispose();
+                break;
             // CLUBS
             case "clubs_aniadir":
                 System.out.println("club ania");
@@ -205,7 +214,6 @@ public class Controlador_App implements ActionListener {
     private void futbolistasAniadir() {
         estandarizarVentana(vista.dialogoFutbolistaAniadir, "Añadir un nuevo futbolista",
                 100, 100, 380, 350, false, true);
-        
     }
     
     /**
@@ -214,11 +222,11 @@ public class Controlador_App implements ActionListener {
      * acción.
      */
     private void faAniadir() {
-        String nombre = vista.jPanel_FutbolistaDatosAniadir.txt_nombre.getText();
-        String apellido = vista.jPanel_FutbolistaDatosAniadir.txt_apellido.getText();
-        String nacionalidad = vista.jPanel_FutbolistaDatosAniadir.txt_nacionalidad.getText();
-        String nif = vista.jPanel_FutbolistaDatosAniadir.txt_nif.getText();
-        String anio = vista.jPanel_FutbolistaDatosAniadir.txt_anio_nacimiento.getText();
+        String nombre = vista.jPanel_FutbolistaAniadir.txt_nombre.getText().trim();
+        String apellido = vista.jPanel_FutbolistaAniadir.txt_apellido.getText().trim();
+        String nacionalidad = vista.jPanel_FutbolistaAniadir.txt_nacionalidad.getText().trim();
+        String nif = vista.jPanel_FutbolistaAniadir.txt_nif.getText().trim();
+        String anio = vista.jPanel_FutbolistaAniadir.txt_anio_nacimiento.getText().trim();
         String[] comprobacion = Validar.validarDatosFutbolista(nombre, apellido,
                 nacionalidad, nif, anio);
         Futbolista futbolista;
@@ -232,24 +240,95 @@ public class Controlador_App implements ActionListener {
                 usuarioLogeado.getTipoCuentaBD());
             // Comprueba el exito de la inserción
             if (resultado[0].equals("Exito")) {
-                MuestraMensaje.muestraExito(vista.dialogoFutbolistaAniadir, 
+                MuestraMensaje.muestraExito(vista.jPanel_FutbolistaAniadir, 
                     resultado[1], resultado[0]);
                  vista.dialogoFutbolistaAniadir.dispose();
                  futbolistasActualizar();
             } else {
-                MuestraMensaje.muestraError(vista.dialogoFutbolistaAniadir, 
+                MuestraMensaje.muestraError(vista.jPanel_FutbolistaAniadir, 
                     resultado[1], resultado[0]);
             }
         } else {
-            MuestraMensaje.muestraAdvertencia(vista.dialogoFutbolistaAniadir, 
+            MuestraMensaje.muestraAdvertencia(vista.jPanel_FutbolistaAniadir, 
                     comprobacion[1], comprobacion[0]);
         }
         
     }
     
     // MODIFICAR FUTBOLISTA METODOS
+    /**
+     * Accion relacionada al boton de modificar en la pestaña de futbolistas.
+     * Abre la ventana de añadir futbolista.
+     */
     private void futbolistasModificar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int seleccion = vista.jPanel_futbolistas.jTable.getSelectedRow();
+        
+        if (seleccion == -1) {
+            MuestraMensaje.muestraAdvertencia(vista, "Por favor seleccione un "
+                    + "futbolista a modificar.", "Sin selección");
+        } else {
+            // Establezco los datos del futbolista seleccionado en la ventana
+            vista.jPanel_FutbolistaModificar.txt_id.setText(
+                    vista.jPanel_futbolistas.jTable
+                            .getValueAt(seleccion, 0).toString());
+            vista.jPanel_FutbolistaModificar.txt_nif.setText(
+                    vista.jPanel_futbolistas.jTable
+                            .getValueAt(seleccion, 1).toString());
+            vista.jPanel_FutbolistaModificar.txt_nombre.setText(
+                    vista.jPanel_futbolistas.jTable
+                            .getValueAt(seleccion, 2).toString());
+            vista.jPanel_FutbolistaModificar.txt_apellido.setText(
+                    vista.jPanel_futbolistas.jTable
+                            .getValueAt(seleccion, 3).toString());
+            vista.jPanel_FutbolistaModificar.txt_anio_nacimiento.setText(
+                    vista.jPanel_futbolistas.jTable
+                            .getValueAt(seleccion, 4).toString());
+            vista.jPanel_FutbolistaModificar.txt_nacionalidad.setText(
+                    vista.jPanel_futbolistas.jTable
+                            .getValueAt(seleccion, 5).toString());
+            // Abro la ventana
+            estandarizarVentana(vista.dialogoFutbolistaModificar, "Modificar un futbolista",
+                    100, 100, 380, 350, false, true);
+        }
+    }
+    
+    /**
+     * Recoge los datos de la vista y los trata de "UPDATE" en la base de
+     * datos, mostrando un mensaje u otro según el éxito o fracaso de la
+     * acción.
+     */
+    private void fmModificar() {
+        String id = vista.jPanel_FutbolistaModificar.txt_id.getText().trim();
+        String nombre = vista.jPanel_FutbolistaModificar.txt_nombre.getText().trim();
+        String apellido = vista.jPanel_FutbolistaModificar.txt_apellido.getText().trim();
+        String nacionalidad = vista.jPanel_FutbolistaModificar.txt_nacionalidad.getText().trim();
+        String nif = vista.jPanel_FutbolistaModificar.txt_nif.getText().trim();
+        String anio = vista.jPanel_FutbolistaModificar.txt_anio_nacimiento.getText().trim();
+        String[] comprobacion = Validar.validarDatosFutbolista(nombre, apellido,
+                nacionalidad, nif, anio);
+        Futbolista futbolista;
+        String[] resultado;
+        
+        // Comprueba si los datos están bien.
+        if (comprobacion[0].equals("Exito")) {
+            futbolista = new Futbolista(Integer.parseInt(id), nombre, apellido, 
+                    Integer.parseInt(anio), nacionalidad, nif);
+            resultado = futbolistas.actualizarFutbolista(futbolista, 
+                usuarioLogeado.getTipoCuentaBD());
+            // Comprueba el exito de la inserción
+            if (resultado[0].equals("Exito")) {
+                MuestraMensaje.muestraExito(vista.jPanel_FutbolistaModificar, 
+                    resultado[1], resultado[0]);
+                 vista.dialogoFutbolistaModificar.dispose();
+                 futbolistasActualizar();
+            } else {
+                MuestraMensaje.muestraError(vista.jPanel_FutbolistaModificar, 
+                    resultado[1], resultado[0]);
+            }
+        } else {
+            MuestraMensaje.muestraAdvertencia(vista.jPanel_FutbolistaModificar, 
+                    comprobacion[1], comprobacion[0]);
+        }
     }
 
     // ELIMINAR FUTBOLISTA METODOS
@@ -279,6 +358,8 @@ public class Controlador_App implements ActionListener {
         ventana.setModal(modal);
         ventana.setVisible(true);
     }
+
+    
 
     
     

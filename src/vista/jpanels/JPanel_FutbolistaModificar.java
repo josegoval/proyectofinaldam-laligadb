@@ -37,12 +37,12 @@ public class JPanel_FutbolistaModificar extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txt_nif = new javax.swing.JFormattedTextField();
-        txt_nombre = new javax.swing.JFormattedTextField();
-        txt_apellido = new javax.swing.JFormattedTextField();
         txt_anio_nacimiento = new javax.swing.JFormattedTextField();
-        txt_nacionalidad = new javax.swing.JFormattedTextField();
         btn_accion = new javax.swing.JButton();
         btn_cancelar = new javax.swing.JButton();
+        txt_nombre = new javax.swing.JTextField();
+        txt_apellido = new javax.swing.JTextField();
+        txt_nacionalidad = new javax.swing.JTextField();
 
         jButton1.setText("jButton1");
 
@@ -69,25 +69,7 @@ public class JPanel_FutbolistaModificar extends javax.swing.JPanel {
         }
 
         try {
-            txt_nombre.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("???????????????????????????????????????")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        try {
-            txt_apellido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("???????????????????????????????????????")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        try {
             txt_anio_nacimiento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        try {
-            txt_nacionalidad.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("???????????????????????????????????????")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -116,14 +98,14 @@ public class JPanel_FutbolistaModificar extends javax.swing.JPanel {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel_marcoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txt_nif, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_nombre, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_apellido, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_anio_nacimiento, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_nacionalidad)
-                            .addComponent(txt_id)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel_marcoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_nif)
+                            .addComponent(txt_anio_nacimiento)
+                            .addComponent(txt_id, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_nombre)
+                            .addComponent(txt_apellido, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_nacionalidad, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jPanel_marcoLayout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -196,10 +178,10 @@ public class JPanel_FutbolistaModificar extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     public javax.swing.JPanel jPanel_marco;
     public javax.swing.JFormattedTextField txt_anio_nacimiento;
-    public javax.swing.JFormattedTextField txt_apellido;
+    public javax.swing.JTextField txt_apellido;
     public javax.swing.JTextField txt_id;
-    public javax.swing.JFormattedTextField txt_nacionalidad;
+    public javax.swing.JTextField txt_nacionalidad;
     public javax.swing.JFormattedTextField txt_nif;
-    public javax.swing.JFormattedTextField txt_nombre;
+    public javax.swing.JTextField txt_nombre;
     // End of variables declaration//GEN-END:variables
 }

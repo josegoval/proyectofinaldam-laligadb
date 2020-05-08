@@ -45,15 +45,24 @@ public class Validar {
                     + " numeros enteros."};
         }
         
-        if (nombre.equals("")) {
-            return new String[]{"Faltan datos.", "Introduzca un nombre, "
-                    + "por favor."};
-        } else if (apellido.equals("")) {
-            return new String[]{"Faltan datos.", "Introduzca un apellido,"
-                    + " por favor."};
-        } else if (nacionalidad.equals("")) {
-            return new String[]{"Faltan datos.", "Introduzca una nacionalidad,"
-                    + " por favor."};
+        if (nombre.equals("") || tieneEspacios(nombre, 1)) {
+            return new String[]{"Faltan datos.", "Introduzca un nombre sin mas "
+                    + "de 1 espacio, por favor."};
+        } else if (nombre.matches(".*\\d.*")) {
+            return new String[]{"Error de nombre.", "Introduzca un nombre "
+                    + "sin numeros, por favor."};
+        } else if (apellido.equals("") || tieneEspacios(apellido, 1)) {
+            return new String[]{"Faltan datos.", "Introduzca un apellido sin mas "
+                    + "de 1 espacio, por favor."};
+        } else if (apellido.matches(".*\\d.*")) {
+            return new String[]{"Error de apellido.", "Introduzca un apellido "
+                    + "sin numeros, por favor."};
+        } else if (nacionalidad.equals("") || tieneEspacios(nacionalidad, 0)) {
+            return new String[]{"Faltan datos.", "Introduzca una nacionalidad "
+                    + "sin mas de 1 espacio, por favor."};
+         } else if (nacionalidad.matches(".*\\d.*")) {
+            return new String[]{"Error de nacionalidad.", "Introduzca una nacionalidad "
+                    + "sin numeros, por favor."};
         } else if (nif.length() < 9) {
             return new String[]{"NIF erroneo.", "Introduzca un nif de longitud"
                     + " 9, por favor"};
@@ -63,5 +72,24 @@ public class Validar {
         }
         
         return new String[]{"Exito", "Todos los datos son correctos."};
+    }
+    
+    /**
+     * Analiza si el texto tiene espacios.
+     * @param texto Texto a analizar
+     * @param max Numero maximo de espacios permitidos
+     * @return true = el texto tiene espacios, false = el texto no contiene espacios
+     */
+    public static boolean tieneEspacios(String texto, int max) {
+        int espacios = 0;
+        for (int i = 0; i < texto.length(); i++) {
+            if (Character.isWhitespace(texto.charAt(i))) {
+                espacios ++;
+            }
+            if (espacios > max) {
+                return true;
+            }
+        }
+        return false;
     }
 }
