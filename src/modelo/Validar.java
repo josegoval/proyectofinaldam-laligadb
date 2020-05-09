@@ -34,7 +34,7 @@ public class Validar {
      * titulo del mensaje, y en el segundo la descripción de este. <b>Si la
      * acción fuese exitosa devolvería "Exito" en el título (posicion 0).</b>
      */
-    public static String[] validarDatosFutbolista (String nombre, String apellido,
+    public static String[] validarDatosFutbolista(String nombre, String apellido,
             String nacionalidad, String nif, String anio) {
         int anioConvertido;
         
@@ -44,29 +44,89 @@ public class Validar {
             return new String[]{"Año Inválido", "Por favor introduzca solo"
                     + " numeros enteros."};
         }
-        
+        // nombre
         if (nombre.equals("") || tieneEspacios(nombre, 1)) {
             return new String[]{"Faltan datos.", "Introduzca un nombre sin mas "
                     + "de 1 espacio, por favor."};
         } else if (nombre.matches(".*\\d.*")) {
             return new String[]{"Error de nombre.", "Introduzca un nombre "
                     + "sin numeros, por favor."};
+        } else if (!longitudTexto(nombre, 1, 40)) {
+            return new String[]{"Error de nombre.", "Introduzca un nombre "
+                    + "de longitud 1 a 40, por favor."};
+        // apellidos
         } else if (apellido.equals("") || tieneEspacios(apellido, 1)) {
             return new String[]{"Faltan datos.", "Introduzca un apellido sin mas "
                     + "de 1 espacio, por favor."};
         } else if (apellido.matches(".*\\d.*")) {
             return new String[]{"Error de apellido.", "Introduzca un apellido "
                     + "sin numeros, por favor."};
+        } else if (!longitudTexto(apellido, 1, 40)) {
+            return new String[]{"Error de apellido.", "Introduzca un apellido "
+                    + "de longitud 1 a 40, por favor."};
+        // nacionalidad
         } else if (nacionalidad.equals("") || tieneEspacios(nacionalidad, 0)) {
             return new String[]{"Faltan datos.", "Introduzca una nacionalidad "
-                    + "sin mas de 1 espacio, por favor."};
+                    + "sin espacios, por favor."};
          } else if (nacionalidad.matches(".*\\d.*")) {
             return new String[]{"Error de nacionalidad.", "Introduzca una nacionalidad "
                     + "sin numeros, por favor."};
-        } else if (nif.length() < 9) {
+        } else if (!longitudTexto(nacionalidad, 1, 30)) {
+            return new String[]{"Error de nacionalidad.", "Introduzca una nacionalidad "
+                    + "de longitud 1 a 30, por favor."};
+        // nif
+        } else if (!longitudTexto(nif, 9, 9)) {
             return new String[]{"NIF erroneo.", "Introduzca un nif de longitud"
                     + " 9, por favor"};
-        } else if (anioConvertido <= 1870 || anioConvertido >= 2100) {
+        // anio
+        } else if (!validarAnio(anioConvertido)) {
+            return new String[]{"Fecha erronea.", "Los años deben comprenderse"
+                    + " entre 1871 y 2099."};
+        }
+        
+        return new String[]{"Exito", "Todos los datos son correctos."};
+    }
+    
+    /**
+     * Comprueba si todos los datos de un club son correctos, exceptuando
+     * el id.
+     * @return Devuelve una array de 2 string, conteniendo en el primero el
+     * titulo del mensaje, y en el segundo la descripción de este. <b>Si la
+     * acción fuese exitosa devolvería "Exito" en el título (posicion 0).</b>
+     */
+    public static String[] validarDatosClub(String nombre, String anio, 
+            String estadio) {
+        int anioConvertido;
+        
+        try {
+            anioConvertido = Integer.parseInt(anio);
+        } catch (Exception e) {
+            return new String[]{"Año Inválido", "Por favor introduzca solo"
+                    + " numeros enteros."};
+        }
+        
+        // nombre
+        if (nombre.equals("") || tieneEspacios(nombre, 3)) {
+            return new String[]{"Faltan datos.", "Introduzca un nombre sin mas "
+                    + "de 3 espacio, por favor."};
+        } else if (nombre.matches(".*\\d.*")) {
+            return new String[]{"Error de nombre.", "Introduzca un nombre "
+                    + "sin numeros, por favor."};
+        } else if (!longitudTexto(nombre, 1, 50)) {
+            return new String[]{"Error de nombre.", "Introduzca un nombre "
+                    + "de longitud 1 a 50, por favor."};
+        // estadio
+        } else if (estadio.equals("") || tieneEspacios(estadio, 1)) {
+            return new String[]{"Faltan datos.", "Introduzca una estadio "
+                    + "sin mas de 1 espacio, por favor."};
+         } else if (estadio.matches(".*\\d.*")) {
+            return new String[]{"Error de estadio.", "Introduzca una estadio "
+                    + "sin numeros, por favor."};
+        } else if (!longitudTexto(estadio, 1, 50)) {
+            return new String[]{"Error de estadio.", "Introduzca una estadio "
+                    + "de longitud 1 a 50, por favor."};
+        // anio
+        } else if (!validarAnio(anioConvertido)) {
             return new String[]{"Fecha erronea.", "Los años deben comprenderse"
                     + " entre 1871 y 2099."};
         }
@@ -91,5 +151,14 @@ public class Validar {
             }
         }
         return false;
+    }
+    
+    /**
+     * Analiza si la fecha se comprende entre 1869 y 2099.
+     * @param anio Año a analizar.
+     * @return true = es válida, false = no es válida
+     */
+    public static boolean validarAnio(int anio){
+        return anio > 1870 && anio < 2100;
     }
 }

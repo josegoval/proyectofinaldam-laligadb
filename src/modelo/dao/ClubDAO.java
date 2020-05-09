@@ -13,6 +13,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import modelo.Validar;
 import modelo.conexion.ConexionBD;
 import modelo.conexion.CuentasBD;
 import modelo.pojos.Club;
@@ -109,8 +110,7 @@ public class ClubDAO {
                         + " a la base de datos!."};
             } else {
                 // Puede fallar o por fecha...
-                if (club.getAnio_creacion() <= 1870 
-                || club.getAnio_creacion() >= 2100) {
+                if (!Validar.validarAnio(club.getAnio_creacion())) {
                 resultado = new String[]{"Año inválido", "Por favor, introduzca"
                     + " una fecha de nacimiento entre 1871 y 2099."};
                 } else {
@@ -170,8 +170,7 @@ public class ClubDAO {
                         + " en la base de datos!."};
             } else {
                 // Puede fallar o por fecha...
-                if (club.getAnio_creacion() <= 1870 
-                || club.getAnio_creacion() >= 2100) {
+                if (!Validar.validarAnio(club.getAnio_creacion())) {
                 resultado = new String[]{"Año inválido", "Por favor, introduzca"
                     + " una fecha de nacimiento entre 1871 y 2099."};
                 } else {

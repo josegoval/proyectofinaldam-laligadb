@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import modelo.Validar;
 import modelo.conexion.ConexionBD;
 import modelo.conexion.CuentasBD;
 import modelo.pojos.Futbolista;
@@ -120,8 +121,7 @@ public class FutbolistaDAO {
         } catch (MySQLIntegrityConstraintViolationException sqle) {
             sqle.printStackTrace();
             // Puede fallar o por fecha...
-            if (futbolista.getAnio_nacimiento() <= 1870 
-                || futbolista.getAnio_nacimiento() >= 2100) {
+            if (!Validar.validarAnio(futbolista.getAnio_nacimiento())) {
                 resultado = new String[]{"Año inválido", "Por favor, introduzca"
                     + " una fecha de nacimiento entre 1871 y 2099."};
             } else {
@@ -187,8 +187,7 @@ public class FutbolistaDAO {
         } catch (MySQLIntegrityConstraintViolationException sqle) {
             sqle.printStackTrace();
             // Puede fallar o por fecha...
-            if (futbolista.getAnio_nacimiento() <= 1870 
-                || futbolista.getAnio_nacimiento() >= 2100) {
+            if (!Validar.validarAnio(futbolista.getAnio_nacimiento())) {
                 resultado = new String[]{"Año inválido", "Por favor, introduzca"
                     + " una fecha de nacimiento entre 1871 y 2099."};
             } else {

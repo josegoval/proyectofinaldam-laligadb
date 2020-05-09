@@ -34,6 +34,10 @@ public class JFrame_App extends javax.swing.JFrame {
         jPanel_FutbolistaAniadir = new vista.jpanels.JPanel_FutbolistaAniadir();
         dialogoFutbolistaModificar = new javax.swing.JDialog();
         jPanel_FutbolistaModificar = new vista.jpanels.JPanel_FutbolistaModificar();
+        dialogoClubAniadir = new javax.swing.JDialog();
+        jPanel_ClubAniadir = new vista.jpanels.JPanel_ClubAniadir();
+        dialogoClubModificar = new javax.swing.JDialog();
+        jPanel_ClubModificar = new vista.jpanels.JPanel_ClubModificar();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane_Cabecera = new javax.swing.JTabbedPane();
         jPanel_futbolistas = new vista.jpanels.JPanel_Tablas();
@@ -61,6 +65,28 @@ public class JFrame_App extends javax.swing.JFrame {
             .addGroup(dialogoFutbolistaModificarLayout.createSequentialGroup()
                 .addComponent(jPanel_FutbolistaModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout dialogoClubAniadirLayout = new javax.swing.GroupLayout(dialogoClubAniadir.getContentPane());
+        dialogoClubAniadir.getContentPane().setLayout(dialogoClubAniadirLayout);
+        dialogoClubAniadirLayout.setHorizontalGroup(
+            dialogoClubAniadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel_ClubAniadir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        dialogoClubAniadirLayout.setVerticalGroup(
+            dialogoClubAniadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel_ClubAniadir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        javax.swing.GroupLayout dialogoClubModificarLayout = new javax.swing.GroupLayout(dialogoClubModificar.getContentPane());
+        dialogoClubModificar.getContentPane().setLayout(dialogoClubModificarLayout);
+        dialogoClubModificarLayout.setHorizontalGroup(
+            dialogoClubModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel_ClubModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        dialogoClubModificarLayout.setVerticalGroup(
+            dialogoClubModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel_ClubModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -132,9 +158,13 @@ public class JFrame_App extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JDialog dialogoClubAniadir;
+    public javax.swing.JDialog dialogoClubModificar;
     public javax.swing.JDialog dialogoFutbolistaAniadir;
     public javax.swing.JDialog dialogoFutbolistaModificar;
     private javax.swing.JPanel jPanel1;
+    public vista.jpanels.JPanel_ClubAniadir jPanel_ClubAniadir;
+    public vista.jpanels.JPanel_ClubModificar jPanel_ClubModificar;
     public vista.jpanels.JPanel_FutbolistaAniadir jPanel_FutbolistaAniadir;
     public vista.jpanels.JPanel_FutbolistaModificar jPanel_FutbolistaModificar;
     public vista.jpanels.JPanel_Tablas jPanel_clubs;

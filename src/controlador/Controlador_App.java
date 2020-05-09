@@ -15,6 +15,7 @@ import modelo.Validar;
 import modelo.conexion.CuentasBD;
 import modelo.dao.ClubDAO;
 import modelo.dao.FutbolistaDAO;
+import modelo.pojos.Club;
 import modelo.pojos.Futbolista;
 import modelo.usuarios.TiposUsuario;
 import modelo.usuarios.Usuario;
@@ -23,7 +24,11 @@ import vista.jframes.JFrame_App;
 /**
  * Controlador de la App. <br>
  * Contiene el modelo, la vista, y el usuario con el cual se logeó que 
- * mediante este controlador, modificará la vista.
+ * mediante este controlador, modificará la vista. <br>
+ * <b>Para buscar rapido los apartados busque por "TODO FUTBOLISTAS", "TODO CLUBS"
+ * , "TODO CUENTAS" o "METODOS DE ESTILO". Esto te situará en todos los metodos 
+ * referentes a los mismos.</b> <br><i>(Recuerde que según el id, puede hacer
+ * CRTL + click para ir al metodo seleccionado)</i>.
  * 
  * @author Jose
  * @since 06/05/2020
@@ -107,6 +112,16 @@ public class Controlador_App implements ActionListener {
             vista.jPanel_clubs.btn_asociar.setActionCommand("clubs_asociar");
             vista.jPanel_clubs.btn_eliminar.addActionListener(this);
             vista.jPanel_clubs.btn_eliminar.setActionCommand("clubs_eliminar");
+                // Añadir futbolista
+                vista.jPanel_ClubAniadir.btn_accion.addActionListener(this);
+                vista.jPanel_ClubAniadir.btn_accion.setActionCommand("ca_aniadir");
+                vista.jPanel_ClubAniadir.btn_cancelar.addActionListener(this);
+                vista.jPanel_ClubAniadir.btn_cancelar.setActionCommand("ca_cancelar");
+                // Modificar futbolista
+                vista.jPanel_ClubModificar.btn_accion.addActionListener(this);
+                vista.jPanel_ClubModificar.btn_accion.setActionCommand("cm_modificar");
+                vista.jPanel_ClubModificar.btn_cancelar.addActionListener(this);
+                vista.jPanel_ClubModificar.btn_cancelar.setActionCommand("cm_cancelar");
         }
         
         // Para todos los demas...
@@ -123,13 +138,13 @@ public class Controlador_App implements ActionListener {
         
         // Actualizo las tablas por primera vez.
         futbolistasActualizar();
-        //clubsActualizar();
+        clubsActualizar();
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         switch (ae.getActionCommand()) {
-            // FUTBOLISTAS
+            // ACCIONES FUTBOLISTAS
             case "futbolistas_aniadir":
                 futbolistasAniadir();
                 break;
@@ -153,27 +168,27 @@ public class Controlador_App implements ActionListener {
             case "futbolistas_actualizar":
                 futbolistasActualizar();
                 break;
-                // AÑADIR FUTBOLISTAS
+                // ACCIONES AÑADIR FUTBOLISTAS
                 case "fa_aniadir":
                     faAniadir();
                 break;
                 case "fa_cancelar":
                     vista.dialogoFutbolistaAniadir.dispose();
                 break;
-                // MODIFICAR FUTBOLISTAS
+                // ACCIONES MODIFICAR FUTBOLISTAS
                 case "fm_modificar":
                     fmModificar();
                 break;
                 case "fm_cancelar":
                     vista.dialogoFutbolistaModificar.dispose();
                 break;
-            // CLUBS
+            // ACCIONES CLUBS
             case "clubs_aniadir":
-                System.out.println("club ania");
+                clubsAniadir();
                 break;
                 
             case "clubs_modificar":
-                System.out.println("controlador.Controlador_App.actionPerformed()");
+                clubsModificar();
                 break;
                 
             case "clubs_asociar":
@@ -181,7 +196,7 @@ public class Controlador_App implements ActionListener {
                 break;
                 
             case "clubs_eliminar":
-                System.out.println("controlador.Controlador_App.actionPerformed()");
+                clubsEliminar();
                 break;
                 
             case "clubs_buscar":
@@ -189,11 +204,26 @@ public class Controlador_App implements ActionListener {
                 break;
 
             case "clubs_actualizar":
-                System.out.println("controlador.Controlador_App.actionPerformed()");
+                clubsActualizar();
+                break;
+                // ACCIONES AÑADIR CLUBS
+                case "ca_aniadir":
+                    caAniadir();
+                break;
+                case "ca_cancelar":
+                    vista.dialogoClubAniadir.dispose();
+                break;
+                // ACCIONES MODIFICAR CLUBS
+                case "cm_modificar":
+                    cmModificar();
+                break;
+                case "cm_cancelar":
+                    vista.dialogoClubModificar.dispose();
                 break;
         }
     }
-    
+
+// TODO FUTBOLISTAS
     /**
      * Actualiza en la vista la tabla de futbolistas con todos los registros
      * de los mismos en la base de datos.
@@ -210,7 +240,7 @@ public class Controlador_App implements ActionListener {
                     + "de datos", "Error del Sistema");
         }
     }
-    
+
     // AÑADIR FUTBOLISTA METODOS
     /**
      * Accion relacionada al boton de añadir en la pestaña de futbolistas.
@@ -389,38 +419,12 @@ public class Controlador_App implements ActionListener {
         }
     }
     
-    // METODOS DE ESTILO
-    /**
-     * Modifica la ventana introducida para que aparezca con los datos 
-     * propuestos y la coloca como visible. Además centra la ventana a la
-     * vista del controlador. 
-     * @param ventana Ventana a modificar.
-     * @param titulo Titulo de la ventana.
-     * @param sz Size x
-     * @param sy Size y
-     * @param resizable ¿Resizable?
-     * @param modal ¿Modal?
-     * @param relativoA Ventana a la que mostrar relativo.
-     */
-    private void estandarizarVentana(JDialog ventana, String titulo, int sz, 
-            int sy, boolean resizable, boolean modal, Component relativoA) {
-        ventana.setTitle(titulo);
-        ventana.setSize(sz, sy);
-        ventana.setLocationRelativeTo(relativoA);
-        ventana.setResizable(resizable);
-        ventana.setModal(modal);
-        ventana.setVisible(true);
-    }
-
-    
-
-    
-    
-    /**
+// TODO CLUBS    
+     /**
      * Actualiza en la vista la tabla de clubs con todos los registros
      * de los mismos en la base de datos.
      */
-    /*public void clubsActualizar(){
+    public void clubsActualizar(){
         DefaultTableModel tabla = clubs
                 .getTablaClubs(usuarioLogeado.getTipoCuentaBD());
         
@@ -432,5 +436,184 @@ public class Controlador_App implements ActionListener {
                     + "de datos", "Error del Sistema");
         }
     }
-    */
+    
+    // AÑADIR CLUB METODOS
+    /**
+     * Accion relacionada al boton de añadir en la pestaña de clubs.
+     * Abre la ventana de añadir club.
+     */
+    private void clubsAniadir() {
+        estandarizarVentana(vista.dialogoClubAniadir, "Añadir un nuevo club",
+                370, 290, false, true, vista);
+    }
+    
+    /**
+     * Recoge los datos de la vista y los trata de insertar en la base de
+     * datos, mostrando un mensaje u otro según el éxito o fracaso de la
+     * acción.
+     */
+    private void caAniadir() {
+        String nombre = vista.jPanel_ClubAniadir.txt_nombre.getText().trim();
+        String anio = vista.jPanel_ClubAniadir.txt_anio_creacion.getText().trim();
+        String estadio = vista.jPanel_ClubAniadir.txt_estadio.getText().trim();
+        String[] comprobacion = Validar.validarDatosClub(nombre, anio, estadio);
+        Club club;
+        String[] resultado;
+        
+        // Comprueba si los datos están bien.
+        if (comprobacion[0].equals("Exito")) {
+            club = new Club(nombre, Integer.parseInt(anio), estadio);
+            resultado = clubs.insertarClub(club, usuarioLogeado.getTipoCuentaBD());
+            // Comprueba el exito de la inserción
+            if (resultado[0].equals("Exito")) {
+                MuestraMensaje.muestraExito(vista.jPanel_ClubAniadir, 
+                    resultado[1], resultado[0]);
+                 vista.dialogoClubAniadir.dispose();
+                 clubsActualizar();
+            } else {
+                MuestraMensaje.muestraError(vista.jPanel_ClubAniadir, 
+                    resultado[1], resultado[0]);
+            }
+        } else {
+            MuestraMensaje.muestraAdvertencia(vista.jPanel_ClubAniadir, 
+                    comprobacion[1], comprobacion[0]);
+        }
+        
+    }
+    
+    // MODIFICAR CLUB METODOS
+    /**
+     * Accion relacionada al boton de modificar en la pestaña de clubs.
+     * Abre la ventana de añadir club.
+     */
+    private void clubsModificar() {
+        int seleccion = vista.jPanel_clubs.jTable.getSelectedRow();
+        
+        if (seleccion == -1) {
+            MuestraMensaje.muestraAdvertencia(vista, "Por favor seleccione un "
+                    + "club a modificar.", "Sin selección");
+        } else {
+            // Establezco los datos del futbolista seleccionado en la ventana
+            vista.jPanel_ClubModificar.txt_id.setText(
+                    vista.jPanel_clubs.jTable
+                            .getValueAt(seleccion, 0).toString());
+            vista.jPanel_ClubModificar.txt_nombre.setText(
+                    vista.jPanel_clubs.jTable
+                            .getValueAt(seleccion, 1).toString());
+            vista.jPanel_ClubModificar.txt_anio_creacion.setText(
+                    vista.jPanel_clubs.jTable
+                            .getValueAt(seleccion, 2).toString());
+            vista.jPanel_ClubModificar.txt_estadio.setText(
+                    vista.jPanel_clubs.jTable
+                            .getValueAt(seleccion, 3).toString());
+            // Abro la ventana
+            estandarizarVentana(vista.dialogoClubModificar, "Modificar un clubs",
+                    370, 290, false, true, vista);
+        }
+    }
+    
+    /**
+     * Recoge los datos de la vista y los trata de "UPDATE" en la base de
+     * datos, mostrando un mensaje u otro según el éxito o fracaso de la
+     * acción.
+     */
+    private void cmModificar() {
+        String id = vista.jPanel_ClubModificar.txt_nombre.getText().trim();
+        String nombre = vista.jPanel_ClubModificar.txt_nombre.getText().trim();
+        String anio = vista.jPanel_ClubModificar.txt_anio_creacion.getText().trim();
+        String estadio = vista.jPanel_ClubModificar.txt_estadio.getText().trim();
+        String[] comprobacion = Validar.validarDatosClub(nombre, anio, estadio);
+        Club club;
+        String[] resultado;
+        
+        // Comprueba si los datos están bien.
+        if (comprobacion[0].equals("Exito")) {
+            club = new Club(Integer.parseInt(id), nombre, Integer.parseInt(anio), estadio);
+            resultado = clubs.actualizarClub(club, usuarioLogeado.getTipoCuentaBD());
+            // Comprueba el exito de la inserción
+            if (resultado[0].equals("Exito")) {
+                MuestraMensaje.muestraExito(vista.jPanel_ClubModificar, 
+                    resultado[1], resultado[0]);
+                 vista.dialogoClubModificar.dispose();
+                 clubsActualizar();
+            } else {
+                MuestraMensaje.muestraError(vista.jPanel_ClubModificar, 
+                    resultado[1], resultado[0]);
+            }
+        } else {
+            MuestraMensaje.muestraAdvertencia(vista.jPanel_ClubModificar, 
+                    comprobacion[1], comprobacion[0]);
+        }
+    }
+    
+    // ELIMINAR CLUB METODOS
+    /**
+     * Elimina de la base de datos (DELETE) el club seleccionado, 
+     * informando al usuario del resultado de la acción.
+     */
+    private void clubsEliminar() {
+        Club clubEliminar;
+        int seleccion = vista.jPanel_clubs.jTable.getSelectedRow();
+        boolean eliminar;
+        String[] resultado;
+        
+        if (seleccion == -1) {
+            MuestraMensaje.muestraAdvertencia(vista, "Por favor seleccione un "
+                    + "club a eliminar.", "Sin selección");
+        } else {
+            clubEliminar = new Club(
+                    Integer.parseInt(vista.jPanel_clubs.jTable
+                            .getValueAt(seleccion, 0).toString()), 
+                    vista.jPanel_clubs.jTable.getValueAt(seleccion, 1).toString(), 
+                    Integer.parseInt(vista.jPanel_clubs.jTable
+                            .getValueAt(seleccion, 2).toString()), 
+                    vista.jPanel_clubs.jTable.getValueAt(seleccion, 3).toString());
+            // Abro la ventana
+            eliminar = MuestraMensaje.muestraConfirmación(
+                    vista.jPanel_clubs, 
+                    "¿Está seguro que quiere eliminar al club "
+                            + clubEliminar.getNombre() + "?",
+                    "Eliminar club " + clubEliminar.getId());
+            // Pasa al procedimiento
+            if (eliminar) {
+                resultado = clubs.eliminarClub(clubEliminar, 
+                        usuarioLogeado.getTipoCuentaBD());
+                if (resultado[0].equals("Exito")) {
+                    MuestraMensaje.muestraExito(vista.jPanel_clubs, 
+                            resultado[1], resultado[0]);
+                } else {
+                    MuestraMensaje.muestraError(vista.jPanel_clubs, 
+                            resultado[1], resultado[0]);
+                }
+                // Recarga la tabla independientemente del resultado
+                clubsActualizar();
+            }
+        }
+    }
+    
+// TODO CUENTAS
+    
+// METODOS DE ESTILO
+    /**
+     * Modifica la ventana introducida para que aparezca con los datos 
+     * propuestos y la coloca como visible. Además centra la ventana a la
+     * vista del controlador. 
+     * @param ventana Ventana a modificar.
+     * @param titulo Titulo de la ventana.
+     * @param sx Size x
+     * @param sy Size y
+     * @param resizable ¿Resizable?
+     * @param modal ¿Modal?
+     * @param relativoA Ventana a la que mostrar relativo.
+     */
+    private void estandarizarVentana(JDialog ventana, String titulo, int sx, 
+            int sy, boolean resizable, boolean modal, Component relativoA) {
+        ventana.setTitle(titulo);
+        ventana.setSize(sx, sy);
+        ventana.setLocationRelativeTo(relativoA);
+        ventana.setResizable(resizable);
+        ventana.setModal(modal);
+        ventana.setVisible(true);
+    }
+    
 }
