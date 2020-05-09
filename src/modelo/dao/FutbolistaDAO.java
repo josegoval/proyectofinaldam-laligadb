@@ -20,7 +20,7 @@ import modelo.usuarios.Seguridad;
 /**
  * FutbolistaDAO recoge y contiene todos los metodos para sacar futbolistas de
  * una base de datos y pasarselos al controlador en formato entendible por
- * éste.
+ * éste.  Así como insertar, eliminar y modificar.
  * 
  * @author Jose
  * @since 07/05/2020
@@ -54,8 +54,8 @@ public class FutbolistaDAO {
     }
     
     /**
-     * Consulta a la base de datos todos los futbolistas, y devuelve un Default
-     * table model con todos los datos de los futbolistas construidos.
+     * Consulta a la base de datos todos los futbolistas, y devuelve un 
+     * DefaultTableModel con todos los datos de los futbolistas construidos.
      * @param cuenta Cuenta de la base de datos a la que se conectará. El 
      * usuario posee dichos datos.
      * @return DefaultTableModel con todos los futbolistas registrados en 
@@ -129,7 +129,7 @@ public class FutbolistaDAO {
                 resultado = new String[]{"Campos repetidos",
                     "Ese NIF de futbolista ya está registrado. Por favor,"
                         + "escoja uno diferente o compruebe si el "
-                        + "futbolista que es´ta intentando añadir, ya existe."};
+                        + "futbolista que está intentando añadir, ya existe."};
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -283,6 +283,7 @@ public class FutbolistaDAO {
         } finally {
             ConexionBD.cerrar(con);
             ConexionBD.cerrar(pstm);
+            ConexionBD.cerrar(rs);
         }
         
         if (this.futbolistas == null) {

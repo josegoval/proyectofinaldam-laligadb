@@ -5,6 +5,7 @@
  */
 package modelo.conexion;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -117,6 +118,26 @@ public class ConexionBD {
         if (pstm != null) {
             try {
                 pstm.close();
+                return true;
+            } catch (SQLException sqle) {
+                sqle.printStackTrace();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Cierra el CallableStatement introducido.
+     * @param cstmt CallableStatement a cerrar.
+     * @return true = cerrada, false = no se pudo cerrar por alguna razón <i>(es
+     * posible a que se deba que el parámetro de entrada fuese null).
+     */
+    public static boolean cerrar(CallableStatement cstmt){
+        if (cstmt != null) {
+            try {
+                cstmt.close();
                 return true;
             } catch (SQLException sqle) {
                 sqle.printStackTrace();
