@@ -30,6 +30,11 @@ public class Validar {
     /**
      * Comprueba si todos los datos de un futbolista son correctos, exceptuando
      * el id.
+     * @param nombre
+     * @param apellido
+     * @param nacionalidad
+     * @param nif
+     * @param anio
      * @return Devuelve una array de 2 string, conteniendo en el primero el
      * titulo del mensaje, y en el segundo la descripción de este. <b>Si la
      * acción fuese exitosa devolvería "Exito" en el título (posicion 0).</b>
@@ -90,12 +95,14 @@ public class Validar {
     /**
      * Comprueba si todos los datos de un club son correctos, exceptuando
      * el id.
+     * @param nombre
+     * @param anio
+     * @param estadio
      * @return Devuelve una array de 2 string, conteniendo en el primero el
      * titulo del mensaje, y en el segundo la descripción de este. <b>Si la
      * acción fuese exitosa devolvería "Exito" en el título (posicion 0).</b>
      */
-    public static String[] validarDatosClub(String nombre, String anio, 
-            String estadio) {
+    public static String[] validarDatosClub(String nombre, String anio, String estadio) {
         int anioConvertido;
         
         try {
@@ -133,6 +140,50 @@ public class Validar {
         
         return new String[]{"Exito", "Todos los datos son correctos."};
     }
+    
+    /**
+     * Comprueba si todos los datos de asociar son correctos.
+     * @param nifFutbolista
+     * @param nombreClub
+     * @param temporada
+     * @return Devuelve una array de 2 string, conteniendo en el primero el
+     * titulo del mensaje, y en el segundo la descripción de este. <b>Si la
+     * acción fuese exitosa devolvería "Exito" en el título (posicion 0).</b>
+     */
+    public static String[] validarAsociar(String nifFutbolista, String nombreClub,
+            String temporada) {
+        int anioConvertido;
+        
+        try {
+            anioConvertido = Integer.parseInt(temporada);
+        } catch (Exception e) {
+            return new String[]{"Año Inválido", "Por favor introduzca solo"
+                    + " numeros enteros."};
+        }
+        
+        // nombreClub
+        if (nombreClub.equals("") || tieneEspacios(nombreClub, 3)) {
+            return new String[]{"Faltan datos.", "Introduzca un nombre sin mas "
+                    + "de 3 espacios, por favor."};
+        } else if (nombreClub.matches(".*\\d.*")) {
+            return new String[]{"Error de nombre.", "Introduzca un nombre "
+                    + "sin numeros, por favor."};
+        } else if (!longitudTexto(nombreClub, 1, 50)) {
+            return new String[]{"Error de nombre.", "Introduzca un nombre "
+                    + "de longitud 1 a 50, por favor."};
+        // nif
+        } else if (!longitudTexto(nifFutbolista, 9, 9)) {
+            return new String[]{"NIF erroneo.", "Introduzca un nif de longitud"
+                    + " 9, por favor"};
+        // anio
+        } else if (!validarAnio(anioConvertido)) {
+            return new String[]{"Fecha erronea.", "Los años deben comprenderse"
+                    + " entre 1871 y 2099."};
+        }
+        
+        return new String[]{"Exito", "Todos los datos son correctos."};
+    }
+    
     
     /**
      * Analiza si el texto tiene espacios.

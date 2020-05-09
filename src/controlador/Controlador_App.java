@@ -8,6 +8,7 @@ package controlador;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cuentas;
@@ -69,6 +70,9 @@ public class Controlador_App implements ActionListener {
         // Cambios en la localizacion de los dialogos.
         vista.dialogoFutbolistaAniadir.setLocationRelativeTo(null);
         vista.dialogoFutbolistaModificar.setLocationRelativeTo(null);
+        vista.dialogoClubAniadir.setLocationRelativeTo(null);
+        vista.dialogoClubModificar.setLocationRelativeTo(null);
+        vista.dialogoAsociar.setLocationRelativeTo(null);
         
         // Enlace controlador-vista
         if (usuarioLogeado.getTipo() == TiposUsuario.NORMAL) {
@@ -102,6 +106,11 @@ public class Controlador_App implements ActionListener {
                 vista.jPanel_FutbolistaModificar.btn_accion.setActionCommand("fm_modificar");
                 vista.jPanel_FutbolistaModificar.btn_cancelar.addActionListener(this);
                 vista.jPanel_FutbolistaModificar.btn_cancelar.setActionCommand("fm_cancelar");
+                // Asociar 
+                vista.jPanel_Asociar.btn_accion.addActionListener(this);
+                vista.jPanel_Asociar.btn_accion.setActionCommand("asociar_asociar");
+                vista.jPanel_Asociar.btn_cancelar.addActionListener(this);
+                vista.jPanel_Asociar.btn_cancelar.setActionCommand("asociar_cancelar");
             
             // Referente al panel de clubs...
             vista.jPanel_clubs.btn_aniadir.addActionListener(this);
@@ -122,6 +131,7 @@ public class Controlador_App implements ActionListener {
                 vista.jPanel_ClubModificar.btn_accion.setActionCommand("cm_modificar");
                 vista.jPanel_ClubModificar.btn_cancelar.addActionListener(this);
                 vista.jPanel_ClubModificar.btn_cancelar.setActionCommand("cm_cancelar");
+                // Asociar (ya se asoció arriba)
         }
         
         // Para todos los demas...
@@ -155,6 +165,7 @@ public class Controlador_App implements ActionListener {
                 
             case "futbolistas_asociar":
                 System.out.println("controlador.Controlador_App.actionPerformed()");
+                asociar();
                 break;
                 
             case "futbolistas_eliminar":
@@ -182,6 +193,14 @@ public class Controlador_App implements ActionListener {
                 case "fm_cancelar":
                     vista.dialogoFutbolistaModificar.dispose();
                 break;
+                // ACCIONES ASOCIAR
+                case "asociar_asociar":
+                    System.out.println("controlador.Controlador_App.actionPerformed()");
+                    asociarAccion();
+                break;
+                case "asociar_cancelar":
+                    vista.dialogoAsociar.dispose();
+                break;
             // ACCIONES CLUBS
             case "clubs_aniadir":
                 clubsAniadir();
@@ -193,6 +212,7 @@ public class Controlador_App implements ActionListener {
                 
             case "clubs_asociar":
                 System.out.println("controlador.Controlador_App.actionPerformed()");
+                asociar();
                 break;
                 
             case "clubs_eliminar":
@@ -589,6 +609,74 @@ public class Controlador_App implements ActionListener {
                 clubsActualizar();
             }
         }
+    }
+    
+// ASOCIAR (TODO CLUB - TODO FUTBOLISTA)
+    /**
+     * Accion relacionada al boton de asociar en la pestaña de futbolistas o 
+     * clubs.
+     * Abre la ventana con el futbolista y club seleccionado, si los hubiese,
+     * en un combo box seleccionable-editable con todos los futbolistas y clubs
+     * disponibles, así como el año de temporada.
+     */
+    public void asociar(){
+        int seleccionFutbolista = vista.jPanel_futbolistas.jTable.getSelectedRow();
+        int seleccionClub = vista.jPanel_clubs.jTable.getSelectedRow();
+        
+        // Rellena los combo box
+        try {
+            vista.jPanel_Asociar.jComboBox_NifFutbolista.setModel(futbolistas
+                    .getComboBoxFutbolistas(usuarioLogeado.getTipoCuentaBD()));
+            vista.jPanel_Asociar.jComboBox_NombreClub.setModel(clubs
+                    .getComboBoxClubs(usuarioLogeado.getTipoCuentaBD()));
+            // Establezco los pre-establecidos, si el usuario tiene alguno 
+            // seleccionado de antemano. No es un paso obligatorio.
+            if (seleccionFutbolista != -1) {
+                 vista.jPanel_Asociar.jComboBox_NifFutbolista.setSelectedItem(
+                    vista.jPanel_futbolistas.jTable
+                            .getValueAt(seleccionFutbolista, 1));
+            }
+            if (seleccionClub != -1) {
+                vista.jPanel_Asociar.jComboBox_NombreClub.setSelectedItem(
+                    vista.jPanel_clubs.jTable
+                            .getValueAt(seleccionClub, 1));
+            }
+        } catch (Exception e) {
+            MuestraMensaje.muestraError(vista, "Error al conectarse a la base"
+                    + " de datos, por favor, contacte con un administrador o "
+                    + "intentelo más tarde.", "Error del Sistema");
+        }
+        
+        // Abre la ventana
+        estandarizarVentana(vista.dialogoAsociar, "Asociar", 385, 280, true, 
+                true, vista);
+        
+    }
+    
+    /**
+     * Acción de pulsar el botón de asociar una vez que se haya habierto dicho
+     * diálogo.
+     */
+    public void asociarAccion(){
+        String nifFutbolista = vista.jPanel_Asociar.jComboBox_NifFutbolista
+                .getSelectedItem().toString().trim();
+        String NombreClub = vista.jPanel_Asociar.jComboBox_NombreClub
+                .getSelectedItem().toString().trim();
+        String anio = vista.jPanel_Asociar.txt_anio_nacimiento.getText().trim();
+        String[] comprobacion = Validar.validarAsociar(nifFutbolista, 
+                NombreClub, anio);
+        
+        // Comprueba si los datos están bien.
+        if (comprobacion[0].equals("Exito")) {
+            // SIGUE POR AQUÍ
+            
+        } else {
+            MuestraMensaje.muestraAdvertencia(vista.jPanel_ClubModificar, 
+                    comprobacion[1], comprobacion[0]);
+        }
+        
+        
+        
     }
     
 // TODO CUENTAS

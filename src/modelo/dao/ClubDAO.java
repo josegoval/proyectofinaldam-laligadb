@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import modelo.Validar;
 import modelo.conexion.ConexionBD;
@@ -74,6 +75,28 @@ public class ClubDAO {
         clubs.stream()
                 .forEach(club -> tabla.addRow(club.getArrayAtributos()));
         return tabla;
+    }
+    
+    /**
+     * Consulta a la base de datos todos los clubs, y devuelve un 
+     * DefaultComboBoxModel con todos los Nombre de los clubs...
+     * @param cuenta Cuenta de la base de datos a la que se conectará. El 
+     * usuario posee dichos datos.
+     * @return DefaultComboBoxModel con todos los nombres de clubs registrados
+     * en la base de datos. Si hubiese algún error al traerse los datos de la
+     * base de datos devolvería null.
+     */
+    public DefaultComboBoxModel getComboBoxClubs(CuentasBD cuenta) {
+        DefaultComboBoxModel comboBox;
+        // Casoística de error...
+        if (!selectClubs(cuenta)) {
+            return null;
+        } 
+        // Casoística exitosa...
+        comboBox = new DefaultComboBoxModel();
+        clubs.stream()
+                .forEach(club -> comboBox.addElement(club.getNombre()));
+        return comboBox;
     }
     
 // CRUD BASICO

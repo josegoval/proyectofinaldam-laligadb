@@ -38,6 +38,8 @@ public class JFrame_App extends javax.swing.JFrame {
         jPanel_ClubAniadir = new vista.jpanels.JPanel_ClubAniadir();
         dialogoClubModificar = new javax.swing.JDialog();
         jPanel_ClubModificar = new vista.jpanels.JPanel_ClubModificar();
+        dialogoAsociar = new javax.swing.JDialog();
+        jPanel_Asociar = new vista.jpanels.JPanel_Asociar();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane_Cabecera = new javax.swing.JTabbedPane();
         jPanel_futbolistas = new vista.jpanels.JPanel_Tablas();
@@ -87,6 +89,17 @@ public class JFrame_App extends javax.swing.JFrame {
         dialogoClubModificarLayout.setVerticalGroup(
             dialogoClubModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel_ClubModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        javax.swing.GroupLayout dialogoAsociarLayout = new javax.swing.GroupLayout(dialogoAsociar.getContentPane());
+        dialogoAsociar.getContentPane().setLayout(dialogoAsociarLayout);
+        dialogoAsociarLayout.setHorizontalGroup(
+            dialogoAsociarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel_Asociar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        dialogoAsociarLayout.setVerticalGroup(
+            dialogoAsociarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel_Asociar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -158,11 +171,13 @@ public class JFrame_App extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JDialog dialogoAsociar;
     public javax.swing.JDialog dialogoClubAniadir;
     public javax.swing.JDialog dialogoClubModificar;
     public javax.swing.JDialog dialogoFutbolistaAniadir;
     public javax.swing.JDialog dialogoFutbolistaModificar;
     private javax.swing.JPanel jPanel1;
+    public vista.jpanels.JPanel_Asociar jPanel_Asociar;
     public vista.jpanels.JPanel_ClubAniadir jPanel_ClubAniadir;
     public vista.jpanels.JPanel_ClubModificar jPanel_ClubModificar;
     public vista.jpanels.JPanel_FutbolistaAniadir jPanel_FutbolistaAniadir;

@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import modelo.Validar;
 import modelo.conexion.ConexionBD;
@@ -78,6 +80,28 @@ public class FutbolistaDAO {
         futbolistas.stream()
                 .forEach(futbolista -> tabla.addRow(futbolista.getArrayAtributos()));
         return tabla;
+    }
+    
+    /**
+     * Consulta a la base de datos todos los futbolistas, y devuelve un 
+     * DefaultComboBoxModel con todos los NIF de los futbolistas...
+     * @param cuenta Cuenta de la base de datos a la que se conectará. El 
+     * usuario posee dichos datos.
+     * @return DefaultComboBoxModel con todos los NIF de futbolistas registrados
+     * en la base de datos. Si hubiese algún error al traerse los datos de la
+     * base de datos devolvería null.
+     */
+    public DefaultComboBoxModel getComboBoxFutbolistas(CuentasBD cuenta) {
+        DefaultComboBoxModel comboBox;
+        // Casoística de error...
+        if (!selectFutbolistas(cuenta)) {
+            return null;
+        } 
+        // Casoística exitosa...
+        comboBox = new DefaultComboBoxModel();
+        futbolistas.stream()
+                .forEach(futbolista -> comboBox.addElement(futbolista.getNif()));
+        return comboBox;
     }
     
 // CRUD BASICO

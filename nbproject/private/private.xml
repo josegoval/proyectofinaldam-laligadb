@@ -5,13 +5,13 @@
         <group>
             <file>file:/D:/Documents/NetBeansProjects/LaLigaDB/src/controlador/MuestraMensaje.java</file>
             <file>file:/D:/Documents/NetBeansProjects/LaLigaDB/src/modelo/pojos/Futbolista.java</file>
-            <file>file:/D:/Documents/NetBeansProjects/LaLigaDB/src/vista/jpanels/JPanel_FutbolistaModificar.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/LaLigaDB/src/modelo/conexion/ConexionBD.java</file>
             <file>file:/D:/Documents/NetBeansProjects/LaLigaDB/src/vista/jframes/JFrame_App.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/LaLigaDB/src/modelo/dao/ClubDAO.java</file>
             <file>file:/D:/Documents/NetBeansProjects/LaLigaDB/src/controlador/Controlador_App.java</file>
             <file>file:/D:/Documents/NetBeansProjects/LaLigaDB/src/modelo/dao/FutbolistaDAO.java</file>
             <file>file:/D:/Documents/NetBeansProjects/LaLigaDB/src/modelo/Validar.java</file>
-            <file>file:/D:/Documents/NetBeansProjects/LaLigaDB/src/controlador/Controlador_Login.java</file>
-            <file>file:/D:/Documents/NetBeansProjects/LaLigaDB/src/vista/jpanels/JPanel_FutbolistaAniadir.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/LaLigaDB/src/modelo/pojos/Club.java</file>
         </group>
     </open-files>
 </project-private>
