@@ -30,9 +30,13 @@ public class ConexionBD {
      */
     private static final String db = "laligadb";
     /**
+     * Habilita traer parametros de procedimientos de la base de datos.
+     */
+    private static final String inoutPermissions = "?noAccessToProcedureBodies=true";
+    /**
      * URL completa de la dirección a la base de datos.
      */
-    private static final String url = "jdbc:mysql://localhost/" + db;
+    private static final String url = "jdbc:mysql://localhost/" + db + inoutPermissions;
     /**
      * Usuario a conectar con la base de datos. <br>
      * <b>Por defecto, el usuario está puesto al de login.</b>

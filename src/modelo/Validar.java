@@ -23,7 +23,7 @@ public class Validar {
      * @param min Longitud mínima inclusiva.
      * @return true = está entre max y min, false = no está entre max y min.
      */
-    public static boolean longitudTexto(String texto, int max, int min){
+    public static boolean longitudTexto(String texto, int min, int max ){
         return (texto.length() >= min && texto.length() <= max);
     }
     
@@ -108,7 +108,7 @@ public class Validar {
         // nombre
         if (nombre.equals("") || tieneEspacios(nombre, 3)) {
             return new String[]{"Faltan datos.", "Introduzca un nombre sin mas "
-                    + "de 3 espacio, por favor."};
+                    + "de 3 espacios, por favor."};
         } else if (nombre.matches(".*\\d.*")) {
             return new String[]{"Error de nombre.", "Introduzca un nombre "
                     + "sin numeros, por favor."};

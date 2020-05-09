@@ -518,7 +518,7 @@ public class Controlador_App implements ActionListener {
      * acción.
      */
     private void cmModificar() {
-        String id = vista.jPanel_ClubModificar.txt_nombre.getText().trim();
+        String id = vista.jPanel_ClubModificar.txt_id.getText().trim();
         String nombre = vista.jPanel_ClubModificar.txt_nombre.getText().trim();
         String anio = vista.jPanel_ClubModificar.txt_anio_creacion.getText().trim();
         String estadio = vista.jPanel_ClubModificar.txt_estadio.getText().trim();
