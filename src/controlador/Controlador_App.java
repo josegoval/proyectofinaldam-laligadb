@@ -660,16 +660,27 @@ public class Controlador_App implements ActionListener {
     public void asociarAccion(){
         String nifFutbolista = vista.jPanel_Asociar.jComboBox_NifFutbolista
                 .getSelectedItem().toString().trim();
-        String NombreClub = vista.jPanel_Asociar.jComboBox_NombreClub
+        String nombreClub = vista.jPanel_Asociar.jComboBox_NombreClub
                 .getSelectedItem().toString().trim();
         String anio = vista.jPanel_Asociar.txt_anio_nacimiento.getText().trim();
         String[] comprobacion = Validar.validarAsociar(nifFutbolista, 
-                NombreClub, anio);
+                nombreClub, anio);
+        String[] resultado;
         
         // Comprueba si los datos están bien.
         if (comprobacion[0].equals("Exito")) {
-            // SIGUE POR AQUÍ
-            
+            // Intenta realizar la asociación
+            resultado = clubs.asociar(nifFutbolista, nombreClub, 
+                    Integer.parseInt(anio), usuarioLogeado.getTipoCuentaBD());
+            // Actua según el resultado
+            if (resultado[0].equals("Exito")) {
+                MuestraMensaje.muestraExito(vista.dialogoAsociar, resultado[1], 
+                        resultado[0]);
+                vista.dialogoAsociar.dispose();
+            } else {
+                MuestraMensaje.muestraError(vista.dialogoAsociar, resultado[1], 
+                        resultado[0]);
+            }
         } else {
             MuestraMensaje.muestraAdvertencia(vista.jPanel_ClubModificar, 
                     comprobacion[1], comprobacion[0]);

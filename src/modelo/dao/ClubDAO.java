@@ -300,6 +300,80 @@ public class ClubDAO {
         }
     }
 
-    
+    /**
+     * Inserta en la base de datos militan la asociación con la cuenta dada. <br>
+     * <i>Las respuestas de errores engloban un mal año, valores repetidos y 
+     * errores del sistema y base de datos. El resto de comprobaciones han
+     * de asegurarse en el controlador, de lo contrario dará un error, pero
+     * no especificará de qué tipo de dato.</i>
+     * 
+     * @param nifFutbolista NIF único del futbolista.
+     * @param nombreClub Nombre único del club.
+     * @param temporada Temporada a asociar.
+     * @param cuenta Cuenta de la base de datos a la que se conectará. El 
+     * usuario posee dichos datos.
+     * @return Devuelve un array de 2 Strings, siendo el primero el titulo del
+     * mensaje, y el segundo el contenido de la respuesta. <b>Si la inserción
+     * fuese exitosa, devolverá en la posición 0, el título "Exito".</b>
+     */
+    public String[] asociar(String nifFutbolista, String nombreClub, 
+            int temporada, CuentasBD cuenta) {
+        Connection con = null;
+        CallableStatement cstmt = null;
+        String[] resultado = null;
+        
+        try {
+            con = ConexionBD.getConexion(cuenta);
+            cstmt = con.prepareCall("{call asociar(?,?,?,?)}");
+            cstmt.setString(1, nifFutbolista);
+            cstmt.setString(2, nombreClub);
+            cstmt.setInt(3, temporada);
+            cstmt.registerOutParameter(4, Types.VARCHAR);
+            cstmt.execute();
+            
+            switch (cstmt.getString(4)) {
+                case "Exito":
+                    resultado = new String[]{"Exito",
+                    "¡Has asociado al club " + nombreClub + " y " + nifFutbolista
+                        + " en la base de datos!."};
+                    break;
+                    
+                case "Futbolista o club inexistente":
+                    resultado = new String[]{"Futbolista o club inexistente",
+                    "El club o futbolista seleccionado ya no existe o introdujo"
+                            + "mal sus datos."};
+                    break;
+                    
+                case "Entrada duplicada":
+                    resultado = new String[]{"Entrada duplicada",
+                    "Ya existe esa relación futbolista-club-temporada."};
+                    break;
+                    
+                case "Error de datos":
+                    // Puede fallar o por fecha...
+                    if (!Validar.validarAnio(temporada)) {
+                    resultado = new String[]{"Año inválido", "Por favor, introduzca"
+                        + " una fecha de nacimiento entre 1871 y 2099."};
+                    } else {
+                    // O porque la asociación ya exista
+                    resultado = new String[]{"Campos repetidos",
+                        "Existe algún error de datos, por favor, revise los"
+                            + "parámetros o contacte con un administrador."};
+                    }
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultado = new String[]{"Error del Sistema",
+                    "¡Hay un error con la base de datos! Por favor, "
+                        + "comuniquese con un administrador para "
+                        + "solucionar el problema o intentelo más tarde."};
+        } finally {
+            ConexionBD.cerrar(con);
+            ConexionBD.cerrar(cstmt);
+        }
+        
+        return resultado;
+    }
     
 }
