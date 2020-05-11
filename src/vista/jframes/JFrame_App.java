@@ -42,10 +42,17 @@ public class JFrame_App extends javax.swing.JFrame {
         jPanel_Asociar = new vista.jpanels.JPanel_Asociar();
         dialogoBuscar = new javax.swing.JDialog();
         jPanel_Buscar = new vista.jpanels.JPanel_Buscar();
+        dialogoCrearCuenta = new javax.swing.JDialog();
+        jPanel_CrearCuentaAdmin = new vista.jpanels.JPanel_CrearCuentaAdmin();
+        dialogoCambiarContrasenia = new javax.swing.JDialog();
+        jPanel_ModificarContrasenia = new vista.jpanels.JPanel_ModificarContrasenia();
         jPanel1 = new javax.swing.JPanel();
-        jTabbedPane_Cabecera = new javax.swing.JTabbedPane();
+        Cuentas = new javax.swing.JTabbedPane();
         jPanel_futbolistas = new vista.jpanels.JPanel_Tablas();
         jPanel_clubs = new vista.jpanels.JPanel_Tablas();
+        jPanel_Cuentas = new javax.swing.JPanel();
+        btn_cambiarContrasenia = new javax.swing.JButton();
+        btn_CrearNuevaCuenta = new javax.swing.JButton();
 
         javax.swing.GroupLayout dialogoFutbolistaAniadirLayout = new javax.swing.GroupLayout(dialogoFutbolistaAniadir.getContentPane());
         dialogoFutbolistaAniadir.getContentPane().setLayout(dialogoFutbolistaAniadirLayout);
@@ -119,22 +126,77 @@ public class JFrame_App extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        javax.swing.GroupLayout dialogoCrearCuentaLayout = new javax.swing.GroupLayout(dialogoCrearCuenta.getContentPane());
+        dialogoCrearCuenta.getContentPane().setLayout(dialogoCrearCuentaLayout);
+        dialogoCrearCuentaLayout.setHorizontalGroup(
+            dialogoCrearCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogoCrearCuentaLayout.createSequentialGroup()
+                .addComponent(jPanel_CrearCuentaAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        dialogoCrearCuentaLayout.setVerticalGroup(
+            dialogoCrearCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel_CrearCuentaAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        javax.swing.GroupLayout dialogoCambiarContraseniaLayout = new javax.swing.GroupLayout(dialogoCambiarContrasenia.getContentPane());
+        dialogoCambiarContrasenia.getContentPane().setLayout(dialogoCambiarContraseniaLayout);
+        dialogoCambiarContraseniaLayout.setHorizontalGroup(
+            dialogoCambiarContraseniaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel_ModificarContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        dialogoCambiarContraseniaLayout.setVerticalGroup(
+            dialogoCambiarContraseniaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogoCambiarContraseniaLayout.createSequentialGroup()
+                .addComponent(jPanel_ModificarContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jTabbedPane_Cabecera.addTab("Futbolistas", jPanel_futbolistas);
-        jTabbedPane_Cabecera.addTab("Clubs", jPanel_clubs);
+        Cuentas.addTab("Futbolistas", jPanel_futbolistas);
+        Cuentas.addTab("Clubs", jPanel_clubs);
+
+        btn_cambiarContrasenia.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btn_cambiarContrasenia.setText("Cambiar Contraseña");
+
+        btn_CrearNuevaCuenta.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btn_CrearNuevaCuenta.setText("Crear una nueva cuenta");
+
+        javax.swing.GroupLayout jPanel_CuentasLayout = new javax.swing.GroupLayout(jPanel_Cuentas);
+        jPanel_Cuentas.setLayout(jPanel_CuentasLayout);
+        jPanel_CuentasLayout.setHorizontalGroup(
+            jPanel_CuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CuentasLayout.createSequentialGroup()
+                .addContainerGap(135, Short.MAX_VALUE)
+                .addGroup(jPanel_CuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_CrearNuevaCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_cambiarContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(127, 127, 127))
+        );
+        jPanel_CuentasLayout.setVerticalGroup(
+            jPanel_CuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_CuentasLayout.createSequentialGroup()
+                .addGap(106, 106, 106)
+                .addComponent(btn_cambiarContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73)
+                .addComponent(btn_CrearNuevaCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(218, Short.MAX_VALUE))
+        );
+
+        Cuentas.addTab("Cuentas", jPanel_Cuentas);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane_Cabecera)
+            .addComponent(Cuentas)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jTabbedPane_Cabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Cuentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -188,10 +250,15 @@ public class JFrame_App extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JTabbedPane Cuentas;
+    public javax.swing.JButton btn_CrearNuevaCuenta;
+    public javax.swing.JButton btn_cambiarContrasenia;
     public javax.swing.JDialog dialogoAsociar;
     public javax.swing.JDialog dialogoBuscar;
+    public javax.swing.JDialog dialogoCambiarContrasenia;
     public javax.swing.JDialog dialogoClubAniadir;
     public javax.swing.JDialog dialogoClubModificar;
+    public javax.swing.JDialog dialogoCrearCuenta;
     public javax.swing.JDialog dialogoFutbolistaAniadir;
     public javax.swing.JDialog dialogoFutbolistaModificar;
     private javax.swing.JPanel jPanel1;
@@ -199,10 +266,12 @@ public class JFrame_App extends javax.swing.JFrame {
     public vista.jpanels.JPanel_Buscar jPanel_Buscar;
     public vista.jpanels.JPanel_ClubAniadir jPanel_ClubAniadir;
     public vista.jpanels.JPanel_ClubModificar jPanel_ClubModificar;
+    public vista.jpanels.JPanel_CrearCuentaAdmin jPanel_CrearCuentaAdmin;
+    private javax.swing.JPanel jPanel_Cuentas;
     public vista.jpanels.JPanel_FutbolistaAniadir jPanel_FutbolistaAniadir;
     public vista.jpanels.JPanel_FutbolistaModificar jPanel_FutbolistaModificar;
+    public vista.jpanels.JPanel_ModificarContrasenia jPanel_ModificarContrasenia;
     public vista.jpanels.JPanel_Tablas jPanel_clubs;
     public vista.jpanels.JPanel_Tablas jPanel_futbolistas;
-    public javax.swing.JTabbedPane jTabbedPane_Cabecera;
     // End of variables declaration//GEN-END:variables
 }

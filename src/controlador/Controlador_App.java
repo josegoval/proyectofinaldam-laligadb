@@ -8,7 +8,6 @@ package controlador;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cuentas;
@@ -86,6 +85,9 @@ public class Controlador_App implements ActionListener {
             vista.jPanel_clubs.btn_modificar.setVisible(false);
             vista.jPanel_clubs.btn_asociar.setVisible(false);
             vista.jPanel_clubs.btn_eliminar.setVisible(false);
+            // Referente al panel de cuentas...
+            vista.btn_CrearNuevaCuenta.setVisible(false);
+            
         } else {
             // Referente al panel de futbolistas...
             vista.jPanel_futbolistas.btn_aniadir.addActionListener(this);
@@ -132,6 +134,16 @@ public class Controlador_App implements ActionListener {
                 vista.jPanel_ClubModificar.btn_cancelar.addActionListener(this);
                 vista.jPanel_ClubModificar.btn_cancelar.setActionCommand("cm_cancelar");
                 // Asociar (ya se asoció arriba)
+            
+            // Referente a cuentas
+            vista.btn_CrearNuevaCuenta.addActionListener(this);
+            vista.btn_CrearNuevaCuenta.setActionCommand("cuentas_crearnuevacuenta");
+                // Crear nueva cuenta
+                vista.jPanel_CrearCuentaAdmin.btn_CrearNuevoUsuario
+                        .addActionListener(this);
+                vista.jPanel_CrearCuentaAdmin.btn_CrearNuevoUsuario
+                        .setActionCommand("cnc_accion");
+            
         }
         
         // Para todos los demas...
@@ -145,7 +157,14 @@ public class Controlador_App implements ActionListener {
         vista.jPanel_clubs.btn_buscar.setActionCommand("clubs_buscar");
         vista.jPanel_clubs.btn_actualizar.addActionListener(this);
         vista.jPanel_clubs.btn_actualizar.setActionCommand("clubs_actualizar");
-        
+        // Referente a cuentas
+        vista.btn_cambiarContrasenia.addActionListener(this);
+        vista.btn_cambiarContrasenia.setActionCommand("cuentas_cambiarContrasenia");
+            // Cambiar Contraseña
+            vista.jPanel_ModificarContrasenia.btn_accion.addActionListener(this);
+            vista.jPanel_ModificarContrasenia.btn_accion
+                    .setActionCommand("cc_accion");
+            
         // Actualizo las tablas por primera vez.
         futbolistasActualizar();
         clubsActualizar();
@@ -239,6 +258,22 @@ public class Controlador_App implements ActionListener {
                 case "cm_cancelar":
                     vista.dialogoClubModificar.dispose();
                 break;
+            // ACCIONES CUENTAS
+            case "cuentas_crearnuevacuenta":
+                cuentasCrearNuevaCuenta();
+            break;
+            case "cuentas_cambiarContrasenia":
+                cuentasCambiarContrasenia();
+            break;
+                // ACCIONES CREAR CUENTA
+                case "cnc_accion":
+                    cncAccion();
+                break;
+                // ACCIONES CAMBIAR CONTRASEÑA
+                case "cc_accion":
+                    ccAccion();
+                break;
+            
         }
     }
 
@@ -762,6 +797,93 @@ public class Controlador_App implements ActionListener {
     }
     
 // TODO CUENTAS
+    // CREAR NUEVA CUENTA METODOS
+    /**
+     * Accion relacionada con el botón de Crear nueva cuenta en la pestaña
+     * cuentas. 
+     * Abre una ventana reiniciada disponible para crear una vuenta.
+     */
+    private void cuentasCrearNuevaCuenta() {
+        vista.jPanel_CrearCuentaAdmin.texto_NuevoUsuario.setText("");
+        vista.jPanel_CrearCuentaAdmin.texto_NuevoUsuario.setText("");
+        // Abro la ventana
+        estandarizarVentana(vista.dialogoCrearCuenta, "Crear una nueva cuenta", 
+                440, 280, false, true, vista);
+    }
+    
+    /**
+     * Botón de acción en el dialogo de crear una nueva cuenta. Inserta en la
+     * base de datos la cuenta con los datos introducidos por el usuario en el
+     * dialogo de Crear Nueva Cuenta.
+     */
+    private void cncAccion() {
+        String[] resultado = cuentas.insertarCuenta(
+                vista.jPanel_CrearCuentaAdmin.texto_NuevoUsuario.getText(), 
+                vista.jPanel_CrearCuentaAdmin.texto_NuevaContrasenia.getText(),
+                vista.jPanel_CrearCuentaAdmin.jComboBox.getSelectedItem().toString());
+        
+        if (resultado[0].equals("¡Usuario Creado!")) {
+            MuestraMensaje.muestraExito(vista.dialogoCrearCuenta, resultado[1],
+                    resultado[0]);
+            vista.dialogoCrearCuenta.dispose();
+        } else if(resultado[0].equals("Usuario no disponible")) {
+            MuestraMensaje.muestraAdvertencia(vista.dialogoCrearCuenta, 
+                    resultado[1], resultado[0]);
+        } else {
+            MuestraMensaje.muestraError(vista.dialogoCrearCuenta, 
+                    resultado[1], resultado[0]);
+        }
+    }
+    
+    // CAMBIAR CONTRASEÑA METODOS
+    /**
+     * Accion relacionada con el botón de Cambiar Contraseña en la pestaña
+     * cuentas. 
+     * Abre una ventana reiniciada disponible para cambiar la contraseña.
+     */
+    private void cuentasCambiarContrasenia() {
+        // Reinicio los campos
+        vista.jPanel_ModificarContrasenia.texto_antiguaContrasenia.setText("");
+        vista.jPanel_ModificarContrasenia.texto_nuevaContrasenia.setText("");
+        vista.jPanel_ModificarContrasenia.texto_repetirNuevaContrasenia.setText("");
+        // Abro la ventana
+        estandarizarVentana(vista.dialogoCambiarContrasenia, "Cambiar Contraseña", 
+               408, 278, false, true, vista);
+        
+    }
+    
+    /**
+     * Acción de cambiar la contraseña en el dialogo dialogoCambiarContaseña.
+     * Trata de hacer un update con la contraseña introducida si fuese posible
+     * informando al usuario de todos los posibles errores.
+     */
+    private void ccAccion() {
+        String antigua = vista.jPanel_ModificarContrasenia
+                .texto_antiguaContrasenia.getText();
+        String nueva = vista.jPanel_ModificarContrasenia
+                .texto_nuevaContrasenia.getText();
+        String repetida = vista.jPanel_ModificarContrasenia
+                .texto_repetirNuevaContrasenia.getText();
+        String[] comprobacion = Validar.validarCambioContrasenia(usuarioLogeado.getUser(), 
+                antigua, nueva, repetida);
+        String[] resultado;
+        
+        if (comprobacion[0].equals("Exito")) {
+            resultado = cuentas.updatePassword(usuarioLogeado.getUser(), 
+                    nueva, usuarioLogeado.getTipoCuentaBD());
+            if (resultado[0].equals("¡Contraseña cambiada!")) {
+                MuestraMensaje.muestraExito(vista.dialogoCambiarContrasenia, 
+                        resultado[1], resultado[0]);
+            } else {
+                MuestraMensaje.muestraError(vista.dialogoCambiarContrasenia, 
+                        resultado[1], resultado[0]);
+            }
+            vista.dialogoCambiarContrasenia.dispose();
+        } else {
+            MuestraMensaje.muestraError(vista.dialogoCambiarContrasenia, 
+                    comprobacion[1], comprobacion[0]);
+        }
+    }
     
 // METODOS DE ESTILO
     /**
@@ -785,5 +907,5 @@ public class Controlador_App implements ActionListener {
         ventana.setModal(modal);
         ventana.setVisible(true);
     }
-    
+
 }

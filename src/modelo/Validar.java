@@ -7,6 +7,7 @@ package modelo;
 
 import controlador.MuestraMensaje;
 import controlador.MuestraMensaje;
+import modelo.usuarios.Seguridad;
 
 /**
  * Clase dedicada a la validación de todos los posibles parámetros de entrada.
@@ -211,5 +212,31 @@ public class Validar {
      */
     public static boolean validarAnio(int anio){
         return anio > 1870 && anio < 2100;
+    }
+    
+    /**
+     * Valida los datos del cambio de contraseña y responde con éxito o algún
+     * error en los datos introducidos por parámetro: contraseña no correcta,
+     * o no coincidente.
+     * @param user Nomrbe único de usuario.
+     * @param antigua Antigua contraseña.
+     * @param nueva Nueva contraseña.
+     * @param repetida Nueva contraseña repetida.
+     * @return Devuelve una array de 2 string, conteniendo en el primero el
+     * titulo del mensaje, y en el segundo la descripción de este. <b>Si la
+     * acción fuese exitosa devolvería "Exito" en el título (posicion 0).</b>
+     */
+    public static String[] validarCambioContrasenia(String user, String antigua,
+            String nueva, String repetida) {
+        Cuentas cuentas = new Cuentas();
+        if (!cuentas.validarSesion(user, antigua)[0].equals("Exito")) {
+            return new String[]{"Contraseña no correcta", "Su antigua contraseña"
+                    + " no coincide."};
+        } else if (!Seguridad.validarContrasenia(nueva, repetida)) {
+            return new String[]{"La nueva contraseña no coincide", "La contraseña"
+                    + " nueva y repetida no coinciden."};
+        }
+        
+        return new String[]{"Exito", "Ha cambiado su contraseña."};
     }
 }

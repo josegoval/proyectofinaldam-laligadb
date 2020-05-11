@@ -65,7 +65,7 @@ public class Cuentas {
         } catch (MySQLIntegrityConstraintViolationException sqle) {
             sqle.printStackTrace();
             resultado = new String[]{"Usuario no disponible",
-                    "Ese nombre de usuario no está disponible. Por favor,"
+                    "Ese nombre de usuario no está disponible. Por favor, "
                                 + "escoja uno diferente."};
         } catch (Exception e) {
             e.printStackTrace();
@@ -164,4 +164,51 @@ public class Cuentas {
         return usuario;
     }
     
+     /**
+     * Actualiza en la base de datos la contraseña, si es posible, y devuelve 2
+     * strings, con mensajes a mostrar si fuese necesario, o validando el
+     * éxito del update.
+     * @param usuario
+     * @param contrasenia
+     * @param tipo Tipo de cuenta de la base de datos. El usuario contiene dichos
+     * datos.
+     * @return Un array de dos String, el primero con el título del mensaje, y 
+     * el segundo, con conteniendo el contenido del mensaje a mostrar. 
+     * <b>Si la inserción fuese fructifera, "¡Contraseña cambiada!" en el título.</b>
+     */
+    public String[] updatePassword(String usuario, String contrasenia, CuentasBD tipo) {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        int exito;
+        String[] resultado;
+        
+        try {
+            con = ConexionBD.getConexion(tipo);
+            pstm = con.prepareStatement("UPDATE usuarios SET password=? WHERE user=?");
+            pstm.setString(1, Seguridad.hashPassSHA256(contrasenia));
+            pstm.setString(2, usuario);
+            exito = pstm.executeUpdate();
+            
+            if (exito == 1) {
+                resultado = new String[]{"¡Contraseña cambiada!",
+                    "Ha cambiado su contraseña."};
+            } else {
+                resultado = new String[]{"Error",
+                    "¡No se ha podido cambiar la contraseña!"};
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultado = new String[]{"Error del Sistema",
+                    "¡Hay un error con la base de datos! Por favor, "
+                                + "comuniquese con un administrador para "
+                                + "solucionar el problema o intentelo más tarde."};
+        } finally {
+            ConexionBD.cerrar(con);
+            ConexionBD.cerrar(pstm);
+        }
+        
+        return resultado;
+    }
+     
 }
