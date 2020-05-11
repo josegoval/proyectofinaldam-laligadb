@@ -99,6 +99,36 @@ public class ClubDAO {
         return comboBox;
     }
     
+     /**
+     * Consulta a la base de datos todos los futbolistas que han militado en 
+     * un club y devuelve una tabla con los datos.
+     * @param idClub ID único del club que buscar.
+     * @param cuenta Cuenta de la base de datos a la que se conectará. El 
+     * usuario posee dichos datos.
+     * @return DefaultTableModel con todos los datos militan registrados en 
+     * la base de datos para ese club. Si hubiese algún error al traerse 
+     * los datos de la base de datos devolvería null.
+     */
+    public DefaultTableModel getTablaMilitan(int idClub, CuentasBD cuenta) {
+        DefaultTableModel tabla;
+        String[] encabezado;
+        String[][] resultado = buscarMilitadoClub(idClub, cuenta);
+        // Casoística de error...
+        if (resultado == null) {
+            return null;
+        } 
+        // Casoística exitosa...
+        tabla = new DefaultTableModel();
+        encabezado = new String[]{"ID", "NIF", "Nombre", "Apellido", 
+            "A.Nacimiento", "Nacionalidad", "Temporada"};
+        tabla.setColumnIdentifiers(encabezado);
+        for (String[] datos : resultado) {
+            tabla.addRow(datos);
+        }
+        
+        return tabla;
+    }
+    
 // CRUD BASICO
     /**
      * Inserta en la base de datos al club con la cuenta dada. <br>
@@ -371,6 +401,66 @@ public class ClubDAO {
         } finally {
             ConexionBD.cerrar(con);
             ConexionBD.cerrar(cstmt);
+        }
+        
+        return resultado;
+    }
+    
+// RELACION MILITAN
+    /**
+     * Busca en la base de datos los futbolistas que hayan militado en el club
+     * y devuelve un String[][] con todos los datos en el siguiente
+     * orden: idFutbolista, nifFutbolista, NombreFutbolista, ApellidoFutbolista, 
+     * AñoDeNacimientoFutbolista, Nacionalidad, Temporada.
+     * @param idClub ID único del club que buscar.
+     * @param cuenta Cuenta de la base de datos a la que se conectará. El 
+     * usuario posee dichos datos.
+     * @return String[][] con todos los datos en el siguiente
+     * orden: idFutbolista, nifFutbolista, NombreFutbolista, ApellidoFutbolista, 
+     * AñoDeNacimientoFutbolista, Nacionalidad, Temporada.
+     */
+    public String[][] buscarMilitadoClub(int idClub, CuentasBD cuenta) {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String[][] resultado;
+        int valorTemporada;
+        
+        try {
+            con = ConexionBD.getConexion(cuenta);
+            pstm = con.prepareStatement("SELECT f.*, m.temporada FROM "
+                    + "militan AS m JOIN futbolistas AS f ON m.futbolista=f.id "
+                    + "WHERE m.club=?");
+            pstm.setInt(1, idClub);
+            rs = pstm.executeQuery();
+            
+            // Me situo al final
+            rs.last();
+            // Defino la longitud del array
+            resultado = new String[rs.getRow()][7];
+            // Vuelvo al principio
+            rs.beforeFirst();
+            // Construyo el array [posicion][idFutbolista, nifFutbolista, 
+            // NombreFutbolista, ApellidoFutbolista, AñoDeNacimientoFutbolista, 
+            // Nacionalidad, Temporada]
+            for (int i = 0; rs.next(); i++) {
+                resultado[i][0] = Integer.toString(rs.getInt("id"));
+                resultado[i][1] = rs.getString("nif");
+                resultado[i][2] = rs.getString("nombre");
+                resultado[i][3] = rs.getString("apellido");
+                resultado[i][4] = Integer.toString(rs.getInt("anio_nacimiento"));
+                resultado[i][5] = rs.getString("nacionalidad");
+                valorTemporada = rs.getInt("temporada");
+                resultado[i][6] = Integer.toString(valorTemporada) + 
+                        "/" + Integer.toString(valorTemporada + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultado = null;
+        } finally {
+            ConexionBD.cerrar(con);
+            ConexionBD.cerrar(pstm);
+            ConexionBD.cerrar(rs);
         }
         
         return resultado;

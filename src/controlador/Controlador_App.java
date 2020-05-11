@@ -164,7 +164,6 @@ public class Controlador_App implements ActionListener {
                 break;
                 
             case "futbolistas_asociar":
-                System.out.println("controlador.Controlador_App.actionPerformed()");
                 asociar();
                 break;
                 
@@ -173,7 +172,7 @@ public class Controlador_App implements ActionListener {
                 break;
                 
             case "futbolistas_buscar":
-                System.out.println("controlador.Controlador_App.actionPerformed()");
+                futbolistasBuscar();
                 break;
                 
             case "futbolistas_actualizar":
@@ -220,7 +219,7 @@ public class Controlador_App implements ActionListener {
                 break;
                 
             case "clubs_buscar":
-                System.out.println("controlador.Controlador_App.actionPerformed()");
+                clubsBuscar();
                 break;
 
             case "clubs_actualizar":
@@ -439,6 +438,42 @@ public class Controlador_App implements ActionListener {
         }
     }
     
+    // BUSCAR FUTBOLISTA METODOS
+    /**
+     * Acción relacionada con el botón buscar de la pestaña de futbolistas.
+     * Aquí se busca todos los clubs a los que ha pertenecido un futbolista
+     * y se abre una ventana con todos los datos en una tabla dentro de ella.
+     */
+    public void futbolistasBuscar() {
+        int seleccion = vista.jPanel_futbolistas.jTable.getSelectedRow();
+        DefaultTableModel tabla;
+        
+        if (seleccion == -1) {
+            MuestraMensaje.muestraAdvertencia(vista, "Por favor seleccione un "
+                    + "futbolista en el que buscar su historial.", "Sin selección");
+        } else {
+            // Traigo los datos
+            tabla = futbolistas.getTablaMilitan(Integer.parseInt(vista
+                    .jPanel_futbolistas.jTable.getValueAt(seleccion, 0).toString()), 
+                    usuarioLogeado.getTipoCuentaBD());
+            // Los pongo en la tabla si es posible y abro la ventana 
+            try {
+                vista.jPanel_Buscar.tabla.setModel(tabla);
+                vista.jPanel_Buscar.texto_titulo.setText(vista.jPanel_futbolistas
+                        .jTable.getValueAt(seleccion, 1).toString() 
+                        + " ha militado en...");
+                estandarizarVentana(vista.dialogoBuscar, "Buscando historial", 
+                       660, 460, false, true, vista);
+            } catch (Exception e) {
+                e.printStackTrace();
+                MuestraMensaje.muestraError(vista, "Error al conectar con la "
+                        + "base de datos", "Error del Sistema");
+            }
+                    
+        }
+        
+    }
+    
 // TODO CLUBS    
      /**
      * Actualiza en la vista la tabla de clubs con todos los registros
@@ -456,7 +491,7 @@ public class Controlador_App implements ActionListener {
                     + "de datos", "Error del Sistema");
         }
     }
-    
+   
     // AÑADIR CLUB METODOS
     /**
      * Accion relacionada al boton de añadir en la pestaña de clubs.
@@ -611,6 +646,42 @@ public class Controlador_App implements ActionListener {
         }
     }
     
+    // BUSCAR CLUB METODOS
+    /**
+     * Acción relacionada con el botón buscar de la pestaña de clubs.
+     * Aquí se busca todos los futbolsitas que han militado en un club
+     * y se abre una ventana con todos los datos en una tabla dentro de ella.
+     */
+    public void clubsBuscar() {
+        int seleccion = vista.jPanel_clubs.jTable.getSelectedRow();
+        DefaultTableModel tabla;
+        
+        if (seleccion == -1) {
+            MuestraMensaje.muestraAdvertencia(vista, "Por favor seleccione un "
+                    + "club en el que buscar su historial.", "Sin selección");
+        } else {
+            // Traigo los datos
+            tabla = clubs.getTablaMilitan(Integer.parseInt(vista
+                    .jPanel_clubs.jTable.getValueAt(seleccion, 0).toString()), 
+                    usuarioLogeado.getTipoCuentaBD());
+            // Los pongo en la tabla si es posible y abro la ventana 
+            try {
+                vista.jPanel_Buscar.tabla.setModel(tabla);
+                vista.jPanel_Buscar.texto_titulo.setText("Futbolistas del " + 
+                        vista.jPanel_clubs.jTable.getValueAt(seleccion, 1)
+                                .toString());
+                estandarizarVentana(vista.dialogoBuscar, "Buscando historial", 
+                        660, 460, false, true, vista);
+            } catch (Exception e) {
+                e.printStackTrace();
+                MuestraMensaje.muestraError(vista, "Error al conectar con la "
+                        + "base de datos", "Error del Sistema");
+            }
+                    
+        }
+        
+    }
+    
 // ASOCIAR (TODO CLUB - TODO FUTBOLISTA)
     /**
      * Accion relacionada al boton de asociar en la pestaña de futbolistas o 
@@ -648,7 +719,7 @@ public class Controlador_App implements ActionListener {
         }
         
         // Abre la ventana
-        estandarizarVentana(vista.dialogoAsociar, "Asociar", 385, 280, true, 
+        estandarizarVentana(vista.dialogoAsociar, "Asociar", 385, 280, false, 
                 true, vista);
         
     }

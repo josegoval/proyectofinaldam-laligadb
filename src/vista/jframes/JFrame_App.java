@@ -40,6 +40,8 @@ public class JFrame_App extends javax.swing.JFrame {
         jPanel_ClubModificar = new vista.jpanels.JPanel_ClubModificar();
         dialogoAsociar = new javax.swing.JDialog();
         jPanel_Asociar = new vista.jpanels.JPanel_Asociar();
+        dialogoBuscar = new javax.swing.JDialog();
+        jPanel_Buscar = new vista.jpanels.JPanel_Buscar();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane_Cabecera = new javax.swing.JTabbedPane();
         jPanel_futbolistas = new vista.jpanels.JPanel_Tablas();
@@ -100,6 +102,21 @@ public class JFrame_App extends javax.swing.JFrame {
         dialogoAsociarLayout.setVerticalGroup(
             dialogoAsociarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel_Asociar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        javax.swing.GroupLayout dialogoBuscarLayout = new javax.swing.GroupLayout(dialogoBuscar.getContentPane());
+        dialogoBuscar.getContentPane().setLayout(dialogoBuscarLayout);
+        dialogoBuscarLayout.setHorizontalGroup(
+            dialogoBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogoBuscarLayout.createSequentialGroup()
+                .addComponent(jPanel_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        dialogoBuscarLayout.setVerticalGroup(
+            dialogoBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogoBuscarLayout.createSequentialGroup()
+                .addComponent(jPanel_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -172,12 +189,14 @@ public class JFrame_App extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JDialog dialogoAsociar;
+    public javax.swing.JDialog dialogoBuscar;
     public javax.swing.JDialog dialogoClubAniadir;
     public javax.swing.JDialog dialogoClubModificar;
     public javax.swing.JDialog dialogoFutbolistaAniadir;
     public javax.swing.JDialog dialogoFutbolistaModificar;
     private javax.swing.JPanel jPanel1;
     public vista.jpanels.JPanel_Asociar jPanel_Asociar;
+    public vista.jpanels.JPanel_Buscar jPanel_Buscar;
     public vista.jpanels.JPanel_ClubAniadir jPanel_ClubAniadir;
     public vista.jpanels.JPanel_ClubModificar jPanel_ClubModificar;
     public vista.jpanels.JPanel_FutbolistaAniadir jPanel_FutbolistaAniadir;

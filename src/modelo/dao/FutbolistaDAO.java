@@ -104,6 +104,35 @@ public class FutbolistaDAO {
         return comboBox;
     }
     
+    /**
+     * Consulta a la base de datos todos los clubs en los que ha participado
+     * un futbolista y devuelve una tabla con los datos.
+     * @param idFutbolista ID único del futbolista que buscar.
+     * @param cuenta Cuenta de la base de datos a la que se conectará. El 
+     * usuario posee dichos datos.
+     * @return DefaultTableModel con todos los datos militan registrados en 
+     * la base de datos para ese futbolista. Si hubiese algún error al traerse 
+     * los datos de la base de datos devolvería null.
+     */
+    public DefaultTableModel getTablaMilitan(int idFutbolista, CuentasBD cuenta) {
+        DefaultTableModel tabla;
+        String[] encabezado;
+        String[][] resultado = buscarMilitadoFutbolista(idFutbolista, cuenta);
+        // Casoística de error...
+        if (resultado == null) {
+            return null;
+        } 
+        // Casoística exitosa...
+        tabla = new DefaultTableModel();
+        encabezado = new String[]{"ID Club", "Nombre Club", "Temporada"};
+        tabla.setColumnIdentifiers(encabezado);
+        for (String[] datos : resultado) {
+            tabla.addRow(datos);
+        }
+        
+        return tabla;
+    }
+    
 // CRUD BASICO
     /**
      * Inserta en la base de datos al futbolista con la cuenta dada. <br>
@@ -316,5 +345,56 @@ public class FutbolistaDAO {
         }
     }
 
+// RELACION MILITAN
+    /**
+     * Busca en la base de datos los clubs en los que ha militado un futbolista
+     * y devuelve un String[][] con todos los datos en el siguiente
+     * orden: idClub, NombreClub, Temporada.
+     * @param idFutbolista Futbolista que buscar.
+     * @param cuenta Cuenta de la base de datos a la que se conectará. El 
+     * usuario posee dichos datos.
+     * @return String[][] con todos los datos en el siguiente
+     * orden: idClub, NombreClub, Temporada.
+     */
+    public String[][] buscarMilitadoFutbolista(int idFutbolista, CuentasBD cuenta) {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String[][] resultado;
+        int valorTemporada;
+        
+        try {
+            con = ConexionBD.getConexion(cuenta);
+            pstm = con.prepareStatement("SELECT c.id,c.nombre, m.temporada FROM "
+                    + "militan AS m JOIN clubs AS c ON m.club=c.id WHERE"
+                    + " m.futbolista=?");
+            pstm.setInt(1, idFutbolista);
+            rs = pstm.executeQuery();
+            
+            // Me situo al final
+            rs.last();
+            // Defino la longitud del array
+            resultado = new String[rs.getRow()][3];
+            // Vuelvo al principio
+            rs.beforeFirst();
+            // Construyo el array [posicion][idClub, NombreClub, Temporada]
+            for (int i = 0; rs.next(); i++) {
+                resultado[i][0] = Integer.toString(rs.getInt("id"));
+                resultado[i][1] = rs.getString("nombre");
+                valorTemporada = rs.getInt("temporada");
+                resultado[i][2] = Integer.toString(valorTemporada) + 
+                        "/" + Integer.toString(valorTemporada + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultado = null;
+        } finally {
+            ConexionBD.cerrar(con);
+            ConexionBD.cerrar(pstm);
+            ConexionBD.cerrar(rs);
+        }
+        
+        return resultado;
+    }
     
 }
