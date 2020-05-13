@@ -397,4 +397,9 @@ public class FutbolistaDAO {
         return resultado;
     }
     
+// GETTERS
+    public List<Futbolista> getFutbolistas(){
+        return futbolistas;
+    }
+    
 }

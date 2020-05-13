@@ -165,7 +165,7 @@ public class ClubDAO {
                 // Puede fallar o por fecha...
                 if (!Validar.validarAnio(club.getAnio_creacion())) {
                 resultado = new String[]{"Año inválido", "Por favor, introduzca"
-                    + " una fecha de nacimiento entre 1871 y 2099."};
+                    + " una fecha de creación entre 1871 y 2099."};
                 } else {
                 // O porque el nombre ya exista
                 resultado = new String[]{"Campos repetidos",
@@ -464,6 +464,11 @@ public class ClubDAO {
         }
         
         return resultado;
+    }
+    
+// GETTERS
+    public List<Club> getClubs(){
+        return clubs;
     }
     
 }
