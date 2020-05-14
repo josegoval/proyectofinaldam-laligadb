@@ -291,6 +291,12 @@ public class FutbolistaDAO {
                 resultado = new String[]{"Error",
                     "¡El futbolista que intenta eliminar no existe!"};
             }
+        } catch (MySQLIntegrityConstraintViolationException sqle) {
+            sqle.printStackTrace();
+            // Puede fallar o por fecha...
+            resultado = new String[]{"Jugador comprometido",
+                    "Ese jugador ya tiene una asociación y por lo tanto no se"
+                    + " puede eliminar."};
         } catch (Exception e) {
             e.printStackTrace();
             resultado = new String[]{"Error del Sistema",

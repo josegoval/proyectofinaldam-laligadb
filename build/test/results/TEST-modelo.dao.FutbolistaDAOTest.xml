@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="LAPTOP-VE8ST1R3" name="modelo.dao.FutbolistaDAOTest" skipped="0" tests="10" time="0.441" timestamp="2020-05-13T18:35:26">
+<testsuite errors="0" failures="0" hostname="LAPTOP-VE8ST1R3" name="modelo.dao.FutbolistaDAOTest" skipped="0" tests="10" time="0.648" timestamp="2020-05-14T08:58:21">
   <properties>
     <property name="netbeans.autoupdate.country" value="ES" />
     <property name="nb.wait.for.caches" value="true" />
@@ -39,7 +39,7 @@
     <property name="user.name" value="Jose" />
     <property name="copylibs.rebase" value="true" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner modelo.dao.FutbolistaDAOTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,D:\Documents\NetBeansProjects\LaLigaDB\build\test\results\TEST-modelo.dao.FutbolistaDAOTest.xml crashfile=D:\Documents\NetBeansProjects\LaLigaDB\build\junitvmwatcher4934039465398722651.properties propsfile=D:\Documents\NetBeansProjects\LaLigaDB\build\junit1306162577576207239.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner modelo.dao.FutbolistaDAOTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,D:\Documents\NetBeansProjects\LaLigaDB\build\test\results\TEST-modelo.dao.FutbolistaDAOTest.xml crashfile=D:\Documents\NetBeansProjects\LaLigaDB\build\junitvmwatcher8607061590155621463.properties propsfile=D:\Documents\NetBeansProjects\LaLigaDB\build\junit855990728616320673.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -189,7 +189,6 @@
     <property name="javadoc.encoding.used" value="UTF-8" />
     <property name="dist.jar" value="dist/LaLigaDB.jar" />
     <property name="libs.spring-framework400.maven-pom" value="" />
-    <property name="netbeans.automatic.build" value="true" />
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
     <property name="ant.project.name" value="LaLigaDB" />
     <property name="netbeans.hash.code" value="unique=NBJDK_EXTIDE_JAVA_JDK06974f4aa-c5f6-4c03-9624-912857936b5f_70ada211-c78a-4acd-b945-4f0c7c68b716" />
@@ -309,23 +308,23 @@
     <property name="libs.CopyLibs.src" value="" />
     <property name="build.dir" value="build" />
     <property name="ant.version" value="Apache Ant(TM) version 1.9.7 compiled on April 9 2016" />
-    <property name="build.classes.excludes" value="**/*.java,**/*.form" />
     <property name="file.encoding" value="Cp1252" />
+    <property name="build.classes.excludes" value="**/*.java,**/*.form" />
     <property name="jdkBug6558476" value="false" />
     <property name="javadoc.nonavbar" value="false" />
     <property name="platform.active" value="default_platform" />
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
   </properties>
-  <testcase classname="modelo.dao.FutbolistaDAOTest" name="testGetTablaFutbolistas" time="0.207" />
+  <testcase classname="modelo.dao.FutbolistaDAOTest" name="testGetTablaFutbolistas" time="0.356" />
   <testcase classname="modelo.dao.FutbolistaDAOTest" name="testGetClubs" time="0.0" />
-  <testcase classname="modelo.dao.FutbolistaDAOTest" name="testAniadirFutbolistaDAO" time="0.001" />
-  <testcase classname="modelo.dao.FutbolistaDAOTest" name="testEliminarFutbolista" time="0.005" />
-  <testcase classname="modelo.dao.FutbolistaDAOTest" name="testGetComboBoxFutbolistas" time="0.06" />
-  <testcase classname="modelo.dao.FutbolistaDAOTest" name="testBuscarMilitadoFutbolista" time="0.008" />
-  <testcase classname="modelo.dao.FutbolistaDAOTest" name="testInsertarFutbolista" time="0.006" />
-  <testcase classname="modelo.dao.FutbolistaDAOTest" name="testGetTablaMilitan" time="0.101" />
+  <testcase classname="modelo.dao.FutbolistaDAOTest" name="testAniadirFutbolistaDAO" time="0.0" />
+  <testcase classname="modelo.dao.FutbolistaDAOTest" name="testEliminarFutbolista" time="0.008" />
+  <testcase classname="modelo.dao.FutbolistaDAOTest" name="testGetComboBoxFutbolistas" time="0.068" />
+  <testcase classname="modelo.dao.FutbolistaDAOTest" name="testBuscarMilitadoFutbolista" time="0.012" />
+  <testcase classname="modelo.dao.FutbolistaDAOTest" name="testInsertarFutbolista" time="0.012" />
+  <testcase classname="modelo.dao.FutbolistaDAOTest" name="testGetTablaMilitan" time="0.1" />
   <testcase classname="modelo.dao.FutbolistaDAOTest" name="testActualizarFutbolista" time="0.004" />
-  <testcase classname="modelo.dao.FutbolistaDAOTest" name="testSelectFutbolistas" time="0.004" />
+  <testcase classname="modelo.dao.FutbolistaDAOTest" name="testSelectFutbolistas" time="0.008" />
   <system-out><![CDATA[getTablaFutbolistas
 getClubs
 aniadirFutbolistaDAO
@@ -352,7 +351,7 @@ selectFutbolistas
 	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2549)
 	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1861)
 	at com.mysql.jdbc.PreparedStatement.executeQuery(PreparedStatement.java:1962)
-	at modelo.dao.FutbolistaDAO.selectFutbolistas(FutbolistaDAO.java:323)
+	at modelo.dao.FutbolistaDAO.selectFutbolistas(FutbolistaDAO.java:329)
 	at modelo.dao.FutbolistaDAO.getTablaFutbolistas(FutbolistaDAO.java:72)
 	at modelo.dao.FutbolistaDAOTest.testGetTablaFutbolistas(FutbolistaDAOTest.java:75)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -395,7 +394,7 @@ com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: SELECT command denied
 	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2549)
 	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1861)
 	at com.mysql.jdbc.PreparedStatement.executeQuery(PreparedStatement.java:1962)
-	at modelo.dao.FutbolistaDAO.selectFutbolistas(FutbolistaDAO.java:323)
+	at modelo.dao.FutbolistaDAO.selectFutbolistas(FutbolistaDAO.java:329)
 	at modelo.dao.FutbolistaDAO.getComboBoxFutbolistas(FutbolistaDAO.java:97)
 	at modelo.dao.FutbolistaDAOTest.testGetComboBoxFutbolistas(FutbolistaDAOTest.java:89)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -483,7 +482,7 @@ com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: SELECT command denied
 	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2549)
 	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1861)
 	at com.mysql.jdbc.PreparedStatement.executeQuery(PreparedStatement.java:1962)
-	at modelo.dao.FutbolistaDAO.buscarMilitadoFutbolista(FutbolistaDAO.java:372)
+	at modelo.dao.FutbolistaDAO.buscarMilitadoFutbolista(FutbolistaDAO.java:378)
 	at modelo.dao.FutbolistaDAO.getTablaMilitan(FutbolistaDAO.java:120)
 	at modelo.dao.FutbolistaDAOTest.testGetTablaMilitan(FutbolistaDAOTest.java:104)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)

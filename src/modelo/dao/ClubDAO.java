@@ -274,8 +274,9 @@ public class ClubDAO {
                     "¡Has eliminado al club " + club.getNombre()
                         + " de la base de datos!."};
             } else {
-                resultado = new String[]{"Error",
-                    "¡El club que intenta eliminar no existe!"};
+                resultado = new String[]{"Equipo comprometido",
+                    "Ese equipo ya tiene una asociación y por lo tanto no se"
+                    + " puede eliminar."};
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -376,7 +377,7 @@ public class ClubDAO {
                     
                 case "Entrada duplicada":
                     resultado = new String[]{"Entrada duplicada",
-                    "Ya existe esa relación futbolista-club-temporada."};
+                    "Ese jugador ya tiene un club asociado a esa temporada."};
                     break;
                     
                 case "Error de datos":

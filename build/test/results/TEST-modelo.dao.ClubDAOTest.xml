@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="LAPTOP-VE8ST1R3" name="modelo.dao.ClubDAOTest" skipped="0" tests="10" time="0.335" timestamp="2020-05-13T18:35:25">
+<testsuite errors="0" failures="0" hostname="LAPTOP-VE8ST1R3" name="modelo.dao.ClubDAOTest" skipped="0" tests="10" time="0.612" timestamp="2020-05-14T08:58:20">
   <properties>
     <property name="netbeans.autoupdate.country" value="ES" />
     <property name="nb.wait.for.caches" value="true" />
@@ -39,7 +39,7 @@
     <property name="user.name" value="Jose" />
     <property name="copylibs.rebase" value="true" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner modelo.dao.ClubDAOTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,D:\Documents\NetBeansProjects\LaLigaDB\build\test\results\TEST-modelo.dao.ClubDAOTest.xml crashfile=D:\Documents\NetBeansProjects\LaLigaDB\build\junitvmwatcher1160699455911034314.properties propsfile=D:\Documents\NetBeansProjects\LaLigaDB\build\junit6286719084156820629.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner modelo.dao.ClubDAOTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,D:\Documents\NetBeansProjects\LaLigaDB\build\test\results\TEST-modelo.dao.ClubDAOTest.xml crashfile=D:\Documents\NetBeansProjects\LaLigaDB\build\junitvmwatcher8204614357471938630.properties propsfile=D:\Documents\NetBeansProjects\LaLigaDB\build\junit7245443232398043645.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -189,7 +189,6 @@
     <property name="javadoc.encoding.used" value="UTF-8" />
     <property name="dist.jar" value="dist/LaLigaDB.jar" />
     <property name="libs.spring-framework400.maven-pom" value="" />
-    <property name="netbeans.automatic.build" value="true" />
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
     <property name="ant.project.name" value="LaLigaDB" />
     <property name="netbeans.hash.code" value="unique=NBJDK_EXTIDE_JAVA_JDK06974f4aa-c5f6-4c03-9624-912857936b5f_70ada211-c78a-4acd-b945-4f0c7c68b716" />
@@ -309,22 +308,22 @@
     <property name="libs.CopyLibs.src" value="" />
     <property name="build.dir" value="build" />
     <property name="ant.version" value="Apache Ant(TM) version 1.9.7 compiled on April 9 2016" />
-    <property name="build.classes.excludes" value="**/*.java,**/*.form" />
     <property name="file.encoding" value="Cp1252" />
+    <property name="build.classes.excludes" value="**/*.java,**/*.form" />
     <property name="jdkBug6558476" value="false" />
     <property name="javadoc.nonavbar" value="false" />
     <property name="platform.active" value="default_platform" />
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
   </properties>
-  <testcase classname="modelo.dao.ClubDAOTest" name="testInsertarClub" time="0.221" />
-  <testcase classname="modelo.dao.ClubDAOTest" name="testBuscarMilitadoClub" time="0.008" />
-  <testcase classname="modelo.dao.ClubDAOTest" name="testActualizarClub" time="0.013" />
-  <testcase classname="modelo.dao.ClubDAOTest" name="testAsociar" time="0.01" />
-  <testcase classname="modelo.dao.ClubDAOTest" name="testGetComboBoxClubs" time="0.004" />
-  <testcase classname="modelo.dao.ClubDAOTest" name="testSelectClubs" time="0.002" />
-  <testcase classname="modelo.dao.ClubDAOTest" name="testGetTablaClubs" time="0.013" />
-  <testcase classname="modelo.dao.ClubDAOTest" name="testGetTablaMilitan" time="0.007" />
-  <testcase classname="modelo.dao.ClubDAOTest" name="testEliminarClub" time="0.01" />
+  <testcase classname="modelo.dao.ClubDAOTest" name="testInsertarClub" time="0.364" />
+  <testcase classname="modelo.dao.ClubDAOTest" name="testBuscarMilitadoClub" time="0.012" />
+  <testcase classname="modelo.dao.ClubDAOTest" name="testActualizarClub" time="0.024" />
+  <testcase classname="modelo.dao.ClubDAOTest" name="testAsociar" time="0.016" />
+  <testcase classname="modelo.dao.ClubDAOTest" name="testGetComboBoxClubs" time="0.008" />
+  <testcase classname="modelo.dao.ClubDAOTest" name="testSelectClubs" time="0.004" />
+  <testcase classname="modelo.dao.ClubDAOTest" name="testGetTablaClubs" time="0.084" />
+  <testcase classname="modelo.dao.ClubDAOTest" name="testGetTablaMilitan" time="0.012" />
+  <testcase classname="modelo.dao.ClubDAOTest" name="testEliminarClub" time="0.016" />
   <testcase classname="modelo.dao.ClubDAOTest" name="testAniadirClubDAO" time="0.0" />
   <system-out><![CDATA[insertarClub
 buscarMilitadoClub
@@ -352,7 +351,7 @@ aniadirClubDAO
 	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2549)
 	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1861)
 	at com.mysql.jdbc.PreparedStatement.executeQuery(PreparedStatement.java:1962)
-	at modelo.dao.ClubDAO.selectClubs(ClubDAO.java:309)
+	at modelo.dao.ClubDAO.selectClubs(ClubDAO.java:310)
 	at modelo.dao.ClubDAO.getComboBoxClubs(ClubDAO.java:92)
 	at modelo.dao.ClubDAOTest.testGetComboBoxClubs(ClubDAOTest.java:86)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -395,7 +394,7 @@ com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: SELECT command denied
 	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2549)
 	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1861)
 	at com.mysql.jdbc.PreparedStatement.executeQuery(PreparedStatement.java:1962)
-	at modelo.dao.ClubDAO.selectClubs(ClubDAO.java:309)
+	at modelo.dao.ClubDAO.selectClubs(ClubDAO.java:310)
 	at modelo.dao.ClubDAO.getTablaClubs(ClubDAO.java:68)
 	at modelo.dao.ClubDAOTest.testGetTablaClubs(ClubDAOTest.java:72)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -438,7 +437,7 @@ com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: SELECT command denied
 	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2549)
 	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1861)
 	at com.mysql.jdbc.PreparedStatement.executeQuery(PreparedStatement.java:1962)
-	at modelo.dao.ClubDAO.buscarMilitadoClub(ClubDAO.java:435)
+	at modelo.dao.ClubDAO.buscarMilitadoClub(ClubDAO.java:436)
 	at modelo.dao.ClubDAO.getTablaMilitan(ClubDAO.java:115)
 	at modelo.dao.ClubDAOTest.testGetTablaMilitan(ClubDAOTest.java:101)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)

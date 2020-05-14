@@ -140,8 +140,9 @@ public class ClubDAOTest {
         System.out.println("eliminarClub");
         Club club = new Club(0, "no existo", 1950, "Calderón");
         CuentasBD cuenta = CuentasBD.ADMIN;
-        String[] expResult = new String[]{"Error",
-                    "¡El club que intenta eliminar no existe!"};
+        String[] expResult = new String[]{"Equipo comprometido",
+                    "Ese equipo ya tiene una asociación y por lo tanto no se"
+                    + " puede eliminar."};
         String[] result = instance.eliminarClub(club, cuenta);
         assertArrayEquals(expResult, result);
     }
