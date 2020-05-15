@@ -37,12 +37,12 @@ public class ConexionBD {
      * URL completa de la dirección a la base de datos.
      */
     // LOCAL
-    private static final String url = "jdbc:mysql://localhost/" + db + inoutPermissions;
+    //private static final String url = "jdbc:mysql://localhost/" + db + inoutPermissions;
     /**
      * URL completa de la dirección a la base de datos.
      */
     // COLEGIO
-    //private static final String url = "jdbc:mysql://jgomez.salesianas.es/jgomez_" + db + inoutPermissions;
+    private static final String url = "jdbc:mysql://jgomez.salesianas.es/jgomez_" + db + inoutPermissions;
     /**
      * Usuario a conectar con la base de datos. <br>
      * <b>Por defecto, el usuario está puesto al de login.</b>
@@ -185,11 +185,11 @@ public class ConexionBD {
      */
     public static void cambiarUsuarioLogin() {
         // LOCAL
-        user = "login";
-        password = "0oi98uy76tr54ew32q1";
-        // COLEGIO
         //user = "login";
-        //password = "0oi98uy76tr54ew32q1**";
+        //password = "0oi98uy76tr54ew32q1";
+        // COLEGIO
+        user = "login";
+        password = "0oi98uy76tr54ew32q1**";
     }
     
      /**
@@ -199,11 +199,11 @@ public class ConexionBD {
      */
     public static void cambiarUsuarioCreador() {
         // local
-        user = "creador";
-        password = "1qw23er45ty67ui89op0";
-        // colegio
         //user = "creador";
-        //password = "1qw23er45ty67ui89op0**";
+        //password = "1qw23er45ty67ui89op0";
+        // colegio
+        user = "creador";
+        password = "1qw23er45ty67ui89op0**";
     }
     
     /**
@@ -212,11 +212,11 @@ public class ConexionBD {
      */
     public static void cambiarUsuarioAdmin() {
         // local
-        user = "admin";
-        password = "plkoijhuygftrdsewaq";
+        //user = "admin";
+        //password = "plkoijhuygftrdsewaq";
         // colegio
-        //user = "adminlaliga";
-        //password = "plkoijhuygftrdsewaq**1";
+        user = "adminlaliga";
+        password = "plkoijhuygftrdsewaq**1";
     }
  
     /**
@@ -225,10 +225,10 @@ public class ConexionBD {
      */
     public static void cambiarUsuarioNormal() {
         // local
-        user = "normal";
-        password = "mkjnbhgvcfdxzsa";
-        // colegio
         //user = "normal";
-        //password = "mkjnbhgvcfdxzsa**1";
+        //password = "mkjnbhgvcfdxzsa";
+        // colegio
+        user = "normal";
+        password = "mkjnbhgvcfdxzsa**1";
     }   
 }
