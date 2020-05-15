@@ -31,11 +31,11 @@ public class Validar {
     /**
      * Comprueba si todos los datos de un futbolista son correctos, exceptuando
      * el id.
-     * @param nombre
-     * @param apellido
-     * @param nacionalidad
-     * @param nif
-     * @param anio
+     * @param nombre Nombre del futbolista.
+     * @param apellido Apellido del futbolista.
+     * @param nacionalidad Nacionalidad del futbolista.
+     * @param nif NIF único del futbolista.
+     * @param anio Año de nacimiento del futbolista.
      * @return Devuelve una array de 2 string, conteniendo en el primero el
      * titulo del mensaje, y en el segundo la descripción de este. <b>Si la
      * acción fuese exitosa devolvería "Exito" en el título (posicion 0).</b>
@@ -96,9 +96,9 @@ public class Validar {
     /**
      * Comprueba si todos los datos de un club son correctos, exceptuando
      * el id.
-     * @param nombre
-     * @param anio
-     * @param estadio
+     * @param nombre Nombre único del club.
+     * @param anio Año de creación del club.
+     * @param estadio Estadio del club.
      * @return Devuelve una array de 2 string, conteniendo en el primero el
      * titulo del mensaje, y en el segundo la descripción de este. <b>Si la
      * acción fuese exitosa devolvería "Exito" en el título (posicion 0).</b>
@@ -144,9 +144,9 @@ public class Validar {
     
     /**
      * Comprueba si todos los datos de asociar son correctos.
-     * @param nifFutbolista
-     * @param nombreClub
-     * @param temporada
+     * @param nifFutbolista Nif único del futbolista.
+     * @param nombreClub Nombre único del club.
+     * @param temporada Temporada de la asociación, solo la primera fecha.
      * @return Devuelve una array de 2 string, conteniendo en el primero el
      * titulo del mensaje, y en el segundo la descripción de este. <b>Si la
      * acción fuese exitosa devolvería "Exito" en el título (posicion 0).</b>

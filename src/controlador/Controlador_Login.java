@@ -35,8 +35,8 @@ public class Controlador_Login implements ActionListener {
     
     /**
      * Constructor que inicializa todos los atributos de la clase.
-     * @param vista
-     * @param modelo 
+     * @param vista Vista a usar
+     * @param modelo Modelo a usar
      */
     public Controlador_Login(JFrame_Login vista, Cuentas modelo) {
         this.vista = vista;
@@ -104,6 +104,7 @@ public class Controlador_Login implements ActionListener {
      * Cierra la vista actual de logeo, y carga la App (aplicación principal) 
      * completa en la nueva vista-modelo-controlador pasandole los datos
      * del usuarios a la misma.
+     * @param user Nombre de usuario el cual arrancará la aplicación.
      */
     public void arrancarApp(String user) {
         Usuario usuarioLogeado = modelo.buscarUsuario(user);

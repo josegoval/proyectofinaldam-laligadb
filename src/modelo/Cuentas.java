@@ -36,6 +36,9 @@ public class Cuentas {
      * Inserta en la base de datos la cuenta, si es posible, y devuelve 2
      * strings, con mensajes a mostrar si fuese necesario, o validando el
      * éxito de la inserción.
+     * @param usuario Nombre único de usuario.
+     * @param contrasenia Contraseña de usuario sin hashear
+     * @param tipo Tipo de usuario (NORMAL o ADMIN)
      * @return Un array de dos String, el primero con el título del mensaje, y 
      * el segundo, con conteniendo el contenido del mensaje a mostrar. 
      * <b>Si la inserción fuese fructifera, "¡Usuario Creado!" en el título.</b>
@@ -168,8 +171,8 @@ public class Cuentas {
      * Actualiza en la base de datos la contraseña, si es posible, y devuelve 2
      * strings, con mensajes a mostrar si fuese necesario, o validando el
      * éxito del update.
-     * @param usuario
-     * @param contrasenia
+     * @param usuario Nombre único del usuario.
+     * @param contrasenia Contraseña del usuario sin hashear
      * @param tipo Tipo de cuenta de la base de datos. El usuario contiene dichos
      * datos.
      * @return Un array de dos String, el primero con el título del mensaje, y 

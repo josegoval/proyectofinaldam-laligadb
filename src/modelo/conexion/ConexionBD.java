@@ -36,7 +36,13 @@ public class ConexionBD {
     /**
      * URL completa de la dirección a la base de datos.
      */
-    private static final String url = "jdbc:mysql://localhost/" + db + inoutPermissions;
+    // LOCAL
+    //private static final String url = "jdbc:mysql://localhost/" + db + inoutPermissions;
+    /**
+     * URL completa de la dirección a la base de datos.
+     */
+    // COLEGIO
+    private static final String url = "jdbc:mysql://jgomez.salesianas.es/jgomez_" + db + inoutPermissions;
     /**
      * Usuario a conectar con la base de datos. <br>
      * <b>Por defecto, el usuario está puesto al de login.</b>
@@ -96,7 +102,7 @@ public class ConexionBD {
      * Cierra la conexión con la base de datos.
      * @param conexion Conexión a cerrar
      * @return true = cerrada, false = no se pudo cerrar por alguna razón <i>(es
-     * posible a que se deba que el parámetro de entrada fuese null).
+     * posible a que se deba que el parámetro de entrada fuese null).</i>
      */
     public static boolean cerrar(Connection conexion){
         if (conexion != null) {
@@ -116,7 +122,7 @@ public class ConexionBD {
      * Cierra el PreparedStatement introducido.
      * @param pstm PreparedStatement a cerrar.
      * @return true = cerrada, false = no se pudo cerrar por alguna razón <i>(es
-     * posible a que se deba que el parámetro de entrada fuese null).
+     * posible a que se deba que el parámetro de entrada fuese null).</i>
      */
     public static boolean cerrar(PreparedStatement pstm){
         if (pstm != null) {
@@ -136,7 +142,7 @@ public class ConexionBD {
      * Cierra el CallableStatement introducido.
      * @param cstmt CallableStatement a cerrar.
      * @return true = cerrada, false = no se pudo cerrar por alguna razón <i>(es
-     * posible a que se deba que el parámetro de entrada fuese null).
+     * posible a que se deba que el parámetro de entrada fuese null).</i>
      */
     public static boolean cerrar(CallableStatement cstmt){
         if (cstmt != null) {
@@ -156,7 +162,7 @@ public class ConexionBD {
      * Cierra el ResultSet introducido.
      * @param rs ResultSet a cerrar.
      * @return true = cerrada, false = no se pudo cerrar por alguna razón <i>(es
-     * posible a que se deba que el parámetro de entrada fuese null).
+     * posible a que se deba que el parámetro de entrada fuese null).</i>
      */
     public static boolean cerrar(ResultSet rs){
         if (rs != null) {
@@ -178,8 +184,12 @@ public class ConexionBD {
      * (select ... from usuarios).</i>
      */
     public static void cambiarUsuarioLogin() {
+        // LOCAL
+        //user = "login";
+        //password = "0oi98uy76tr54ew32q1";
+        // COLEGIO
         user = "login";
-        password = "0oi98uy76tr54ew32q1";
+        password = "0oi98uy76tr54ew32q1**";
     }
     
      /**
@@ -188,8 +198,12 @@ public class ConexionBD {
      * base de datos.</i>
      */
     public static void cambiarUsuarioCreador() {
+        // local
+        //user = "creador";
+        //password = "1qw23er45ty67ui89op0";
+        // colegio
         user = "creador";
-        password = "1qw23er45ty67ui89op0";
+        password = "1qw23er45ty67ui89op0**";
     }
     
     /**
@@ -197,8 +211,12 @@ public class ConexionBD {
      * <i>Es la cuenta utilizada por los usuarios tipo ADMIN.</i>
      */
     public static void cambiarUsuarioAdmin() {
-        user = "admin";
-        password = "plkoijhuygftrdsewaq";
+        // local
+        //user = "admin";
+        //password = "plkoijhuygftrdsewaq";
+        // colegio
+        user = "adminlaliga";
+        password = "plkoijhuygftrdsewaq**1";
     }
  
     /**
@@ -206,7 +224,11 @@ public class ConexionBD {
      * <i>Es la cuenta utilizada por los usuarios tipo NORMAL.</i>
      */
     public static void cambiarUsuarioNormal() {
+        // local
+        //user = "normal";
+        //password = "mkjnbhgvcfdxzsa";
+        // colegio
         user = "normal";
-        password = "mkjnbhgvcfdxzsa";
+        password = "mkjnbhgvcfdxzsa**1";
     }   
 }
